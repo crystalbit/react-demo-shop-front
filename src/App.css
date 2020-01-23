@@ -1,16 +1,27 @@
+html, #root, body {
+  height: 100%;
+  margin: 0px;
+}
+
+body {
+  font-family: Helvetica, Arial;
+}
+
 .App {
-  text-align: center;
+  min-height: 100%;
+  flex-direction: column;
+  display: flex;
+  min-width: 900px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.App-body {
+  display: flex;
+  flex: 1;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.content {
+  position: relative;
+  flex: 1;
 }
 
 .App-header {
