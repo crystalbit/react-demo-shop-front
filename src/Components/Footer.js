@@ -34,11 +34,11 @@ export default function(props) {
         <div className={classes.root}>
             <AppBar position="static">
                 <Toolbar className={classes.toolbar}>
-                    <Typography variant="h7" className={classes.leftQuote}>
+                    <Typography className={classes.leftQuote}>
                         “May the Pizza be with you.” Star Wars, 1977
                     </Typography>
                     {/* <Avatar alt="Pizza!" src={ninja} className={classes.large} /> */}
-                    <Typography variant="h7" className={classes.rightQuote}>
+                    <Typography className={classes.rightQuote}>
                         “I'm going to make you a pizza you can't refuse.” The Godfather, 1972 
                     </Typography>
                 </Toolbar>
