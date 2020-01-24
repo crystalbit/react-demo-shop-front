@@ -3,27 +3,28 @@ import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import Avatar from '@material-ui/core/Avatar';
-import logo from '../images/ninja.gif';
 
 const useStyles = makeStyles(theme => ({
     root: {
-      marginBottom: 20
-    },
-    menuButton: {
-      marginRight: theme.spacing(2),
+      flexGrow: 1,
+      marginTop: 20
     },
     toolbar: {
       display: 'flex',
       justifyContent: 'space-between'
     },
-    logo: {
-      width: theme.spacing(7),
-      height: theme.spacing(7),
+    rightQuote: {
+      textAlign: 'right',
       marginTop: 10,
-      marginBottom: 10
+      marginBottom: 10,
+      marginLeft: 25
     },
+    leftQuote: {
+      textAlign: 'left',
+      marginTop: 10,
+      marginBottom: 10,
+      marginRight: 25
+    }
 }));
 
 export default function(props) {
@@ -33,11 +34,13 @@ export default function(props) {
         <div className={classes.root}>
             <AppBar position="static">
                 <Toolbar className={classes.toolbar}>
-                    <Avatar alt="Circle Pizza Logo" src={logo} className={classes.logo} />
-                    <Typography variant="h6">
-                        Ninja Pizza!
+                    <Typography variant="h7" className={classes.leftQuote}>
+                        “May the Pizza be with you.” Star Wars, 1977
                     </Typography>
-                    <Button color="inherit">Login</Button>
+                    {/* <Avatar alt="Pizza!" src={ninja} className={classes.large} /> */}
+                    <Typography variant="h7" className={classes.rightQuote}>
+                        “I'm going to make you a pizza you can't refuse.” The Godfather, 1972 
+                    </Typography>
                 </Toolbar>
             </AppBar>
         </div>
