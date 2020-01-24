@@ -31,8 +31,7 @@ function Product(props) {
     const classes = useStyles();
 
     return (
-        <div className={classes.card}>
-        <Card>
+        <Card className={classes.card}>
             <CardHeader
                 avatar={
                     <Avatar aria-label="recipe" className={classes.avatar}>
@@ -67,7 +66,6 @@ function Product(props) {
         </IconButton>
       </CardActions>
     </Card>
-    </div>
     );
 }
 

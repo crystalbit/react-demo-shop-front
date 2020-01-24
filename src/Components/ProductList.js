@@ -6,8 +6,6 @@ import AutorenewIcon from '@material-ui/icons/Autorenew';
 import { makeStyles } from '@material-ui/core/styles';
 import Product from './Product';
 import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import Paper from '@material-ui/core/Paper';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -36,6 +34,7 @@ function ProductList(props) {
             if (!products) {
                 setError(true);
             } else {
+                setError(false);
                 setLoading(false);
                 setProducts(products);
             }
@@ -62,15 +61,15 @@ function ProductList(props) {
     );
 
     return(
-            <Grid container justify="center" spacing={2}>
-                {products.map(product => (
-                    <Grid item key={product.code}>
-                        <Product 
-                            product={product}
-                        />
-                    </Grid>
-                ))}
-            </Grid>
+        <Grid container justify="center" spacing={2}>
+            {products.map(product => (
+                <Grid item key={product.code}>
+                    <Product 
+                        product={product}
+                    />
+                </Grid>
+            ))}
+        </Grid>
     );
 }
 

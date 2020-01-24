@@ -9,6 +9,6 @@
 
 export default ({
     api: {
-        entry: 'http://localhost:3333/'
+        entry: 'http://localhost:3333/api/'
     }
 });
