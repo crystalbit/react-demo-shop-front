@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React/*, { useState, useEffect }*/ from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -12,7 +12,8 @@ import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
+import config from '../config';
+import path from 'path';
 
 const useStyles = makeStyles(theme => ({
     card: {
@@ -43,8 +44,8 @@ function Product(props) {
             />
       <CardMedia
         className={classes.media}
-        image="/static/images/cards/paella.jpg"
-        title="Paella dish"
+        image={path.join(config.directories.images, props.product.image || '')}
+        title={props.product.name}
       />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">

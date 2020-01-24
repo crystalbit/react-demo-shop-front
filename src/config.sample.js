@@ -10,5 +10,8 @@
 export default ({
     api: {
         entry: 'http://localhost:3333/api/'
+    },
+    directories: {
+        images: '/images/'
     }
 });
