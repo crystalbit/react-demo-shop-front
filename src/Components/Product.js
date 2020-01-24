@@ -40,7 +40,10 @@ function Product(props) {
 
   return (
     <Card className={classes.card}>
-      <CardHeader title={props.product.name} subheader={props.product.subheader || 'good option!'} />
+      <CardHeader
+        title={props.product.name}
+        subheader={props.product.subheader ? '🌠' + props.product.subheader + ' 🌠' : '🍕'}
+      />
       <CardMedia
         className={classes.media}
         image={path.join(config.directories.images, props.product.image || '')}
@@ -62,8 +65,7 @@ function Product(props) {
             label="Add to cart"
             clickable
             color="primary"
-            //onDelete={console.log}
-            //deleteIcon={<AddShoppingCartIcon />}
+            onClick={() => console.log(props.product.id)}
           />
         </Badge>
       </CardActions>
