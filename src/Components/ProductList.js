@@ -62,15 +62,15 @@ function ProductList(props) {
     );
 
     return(
-            <Grid container justify="center" spacing={2}>
-                {products.map(product => (
-                    <Grid item key={product.code}>
-                        <Product 
-                            product={product}
-                        />
-                    </Grid>
-                ))}
-            </Grid>
+        <Grid container justify="center" spacing={2}>
+            {products.map(product => (
+                <Grid item key={product.code}>
+                    <Product 
+                        product={product}
+                    />
+                </Grid>
+            ))}
+        </Grid>
     );
 }
 

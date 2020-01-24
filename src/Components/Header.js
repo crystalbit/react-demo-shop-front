@@ -10,6 +10,7 @@ import logo from '../images/logo.webp';
 const useStyles = makeStyles(theme => ({
     root: {
       flexGrow: 1,
+      marginBottom: 20
     },
     menuButton: {
       marginRight: theme.spacing(2),
