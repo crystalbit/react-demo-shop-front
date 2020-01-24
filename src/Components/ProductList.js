@@ -8,14 +8,14 @@ import Product from './Product';
 import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles(theme => ({
-    root: {
-        flexGrow: 1
-    },
     center: {
         alignItems: 'center',
         display: 'flex',
         justifyContent: 'center',
         height: 400
+    },
+    grid: {
+        display: 'flex',
     }
 }));
 
@@ -63,9 +63,10 @@ function ProductList(props) {
     return(
         <Grid container justify="center" spacing={2}>
             {products.map(product => (
-                <Grid item key={product.code}>
+                <Grid item key={product.code} className={classes.grid}>
                     <Product 
                         product={product}
+                        
                     />
                 </Grid>
             ))}

@@ -5,69 +5,70 @@ import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
-import Avatar from '@material-ui/core/Avatar';
-import IconButton from '@material-ui/core/IconButton';
+import Chip from '@material-ui/core/Chip';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import Typography from '@material-ui/core/Typography';
-import { red } from '@material-ui/core/colors';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Badge from '@material-ui/core/Badge';
 import config from '../config';
 import path from 'path';
 
 const useStyles = makeStyles(theme => ({
     card: {
       width: 280,
+      display: 'flex',
+      flexDirection: 'column'
     },
     media: {
       height: 0,
-      paddingTop: '56.25%', // 16:9
+      paddingTop: '56.25%'
     },
-    avatar: {
-      backgroundColor: red[500],
+    content: {
+      flex: 1
     },
+    actions: {
+      display:'flex',
+      justifyContent: 'space-between',
+      paddingRight: '12px'
+    },
+    actionsTypography: {
+      marginBottom: '5px'
+    }
 }));
 
 function Product(props) {
-    const classes = useStyles();
+  const classes = useStyles();
 
-    return (
-        <Card className={classes.card}>
-            <CardHeader
-                avatar={
-                    <Avatar aria-label="recipe" className={classes.avatar}>
-                        R
-                    </Avatar>
-                }
-                title={props.product.name}
-                subheader="September 14, 2016"
-            />
+  return (
+    <Card className={classes.card}>
+      <CardHeader title={props.product.name} subheader={props.product.subheader || 'good option!'} />
       <CardMedia
         className={classes.media}
         image={path.join(config.directories.images, props.product.image || '')}
         title={props.product.name}
       />
-      <CardContent>
+      <CardContent className={classes.content}>
         <Typography variant="body2" color="textSecondary" component="p">
           {props.product.description}
         </Typography>
       </CardContent>
-      <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
-        <IconButton
-          className={classes.expand}
-          aria-label="show more"
-        >
-          <ExpandMoreIcon />
-        </IconButton>
+      <CardActions disableSpacing className={classes.actions}>
+        <Typography variant="h5" className={classes.actionsTypography} color="textPrimary" component="p">
+          ${props.product.price}
+        </Typography>
+        <Badge badgeContent={4} color="secondary">
+          <Chip
+            mr={4}
+            icon={<ShoppingCartIcon />}
+            label="Add to cart"
+            clickable
+            color="primary"
+            //onDelete={console.log}
+            //deleteIcon={<AddShoppingCartIcon />}
+          />
+        </Badge>
       </CardActions>
     </Card>
-    );
+  );
 }
 
 export default Product;
