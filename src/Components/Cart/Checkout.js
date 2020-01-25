@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import MaskedInput from 'react-text-mask';
@@ -25,6 +26,9 @@ const useStyles = makeStyles(theme => ({
     },
     orderButton: {
         marginTop: 15
+    },
+    backButton: {
+        marginTop: 25
     },
     costData: {
         textAlign: 'right'
@@ -138,6 +142,16 @@ export default function(props) {
                             Make an order
                         </Button>
                     </div>
+                    <Button
+                        aria-label="Go back"
+                        color="primary"
+                        variant="outlined"
+                        component={Link}
+                        to="/"
+                        className={classes.backButton}
+                    >
+                        &lt;&lt; Back to the shop
+                    </Button>
                 </form>
             </Paper>
         </div>
