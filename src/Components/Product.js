@@ -58,14 +58,15 @@ function Product(props) {
         <Typography variant="h5" className={classes.actionsTypography} color="textPrimary" component="p">
           ${props.product.price}
         </Typography>
-        <Badge badgeContent={4} color="secondary">
+        <Badge badgeContent={props.quantity} color="secondary">
           <Chip
             mr={4}
             icon={<ShoppingCartIcon />}
             label="Add to cart"
             clickable
             color="primary"
-            onClick={() => console.log(props.product.id)}
+            onClick={() => props.onAdd(props.product.id)}
+            onDelete={props.quantity ? () => props.onClear(props.product.id) : null}
           />
         </Badge>
       </CardActions>
