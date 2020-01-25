@@ -11,6 +11,8 @@ export default function(props) {
     return(
         <React.Fragment>
             {props.quantity || -1}
+            {props.name || -1}
+            {props.price || -1}
         </React.Fragment>
     );
 }

@@ -67,7 +67,7 @@ function ProductList(props) {
 
     let cartSum = 0;
     for (let i of Object.keys(props.cart)) {
-        cartSum = cartSum + (productsById[i] ? productsById[i].price : 0) * props.cart[i];
+        cartSum = cartSum + (productsById[i] ? productsById[i].price : 0) * (props.cart[i] ? props.cart[i].price : 0);
     }
 
     return(
@@ -80,9 +80,23 @@ function ProductList(props) {
                     <Grid item key={product.code} className={classes.grid}>
                         <Product 
                             product={product}
-                            quantity={props.cart[product.id] || 0}
-                            onAdd={id => props.onSetCart({ ...props.cart, [id]: (props.cart[id] || 0) + 1 })}
-                            onClear={id => props.onSetCart({ ...props.cart, [id]: 0 })}
+                            quantity={props.cart[product.id] ? props.cart[product.id].quantity : 0}
+                            onAdd={id => props.onSetCart({
+                                ...props.cart,
+                                [id]: {
+                                    quantity: props.cart[id] ? props.cart[id].quantity + 1 : 1,
+                                    name: productsById[id] ? productsById[id].name : 'product not exists',
+                                    price: productsById[id] ? productsById[id].price : 0
+                                }
+                            })}
+                            onClear={id => props.onSetCart({
+                                ...props.cart,
+                                [id]: {
+                                    quantity: 0,
+                                    name: productsById[id] ? productsById[id].name : 'product not exists',
+                                    price: productsById[id] ? productsById[id].price : 0
+                                }
+                            })}
                         />
                     </Grid>
                 ))}

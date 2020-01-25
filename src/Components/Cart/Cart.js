@@ -13,8 +13,10 @@ export default function(props) {
 
     return(
         <React.Fragment>
-            {props.cart ? Object.keys(props.cart).map(element => <Element
-                                         quantity={1}
+            {props.cart ? Object.keys(props.cart).map(id => <Element
+                                         quantity={props.cart[id] ? props.cart[id].quantity : 0}
+                                         name={props.cart[id] ? props.cart[id].name : 'product not exists'}
+                                         price={props.cart[id] ? props.cart[id].price : 0}
                                        />) : ''}
         </React.Fragment>
     );
