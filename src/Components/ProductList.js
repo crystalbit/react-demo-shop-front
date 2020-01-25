@@ -41,8 +41,10 @@ function ProductList(props) {
     );
 
     let cartSum = 0;
+        console.log(props)
     for (let i of Object.keys(props.cart)) {
         cartSum = cartSum + (props.productsById[i] ? props.productsById[i].price : 0) * (props.cart[i] ? props.cart[i].quantity : 0);
+        console.log(cartSum, (props.productsById[i] ? props.productsById[i].price : null), (props.cart[i] ? props.cart[i].quantity : null))
     }
 
     return(
