@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import helpers from '../Helpers';
-import api from '../Api';
+import React from 'react';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Chip from '@material-ui/core/Chip';
 import AutorenewIcon from '@material-ui/icons/Autorenew';
@@ -24,47 +22,13 @@ const useStyles = makeStyles(theme => ({
 function ProductList(props) {
     const classes = useStyles();
 
-    /**
-     * cart object is like
-     * {
-     *   id: quantity,
-     *   ...
-     * }
-     */
-    const [ cart, setCart ] = helpers.useLocalStorage('cart', {});
-
-    const [ error, setError ] = useState(false);
-    const [ products, setProducts ] = useState([]);
-    const [ productsById, setProductsById ] = useState([]);
-    const [ updates, invokeUpdate ] = useState(0);
-
-
-    useEffect(() => {
-        api.getProducts()
-        .then(products => {
-            if (!products) {
-                setError(true);
-            } else {
-                setError(false);
-                props.onLoadingChange(false);
-                setProducts(products);
-                let productsObject = {};
-                products.forEach(product => {
-                    productsObject[product.id] = product;
-                })
-                setProductsById(productsObject);
-            }
-        })
-        .catch(() => setError(true));
-    }, [props, updates]);
-
-    if (error) return (
+    if (props.error) return (
         <div className={classes.center}>
             <Chip
                 icon={<AutorenewIcon />}
                 label="Error retrieving data. Click to retry"
                 clickable
-                onClick={() => invokeUpdate(updates + 1)}
+                onClick={props.update}
                 color="primary"
             />
         </div>
@@ -77,8 +41,8 @@ function ProductList(props) {
     );
 
     let cartSum = 0;
-    for (let i of Object.keys(cart)) {
-        cartSum = cartSum + (productsById[i] ? productsById[i].price : 0) * cart[i];
+    for (let i of Object.keys(props.cart)) {
+        cartSum = cartSum + (props.productsById[i] ? props.productsById[i].price : 0) * (props.cart[i] ? props.cart[i].quantity : 0);
     }
 
     return(
@@ -87,13 +51,29 @@ function ProductList(props) {
                 sum={cartSum}
             /> : ''}
             <Grid container justify="center" spacing={2}>
-                {products.map(product => (
+                {props.products.map(product => (
                     <Grid item key={product.code} className={classes.grid}>
                         <Product 
                             product={product}
-                            quantity={cart[product.id] || 0}
-                            onAdd={id => setCart({ ...cart, [id]: (cart[id] || 0) + 1 })}
-                            onClear={id => setCart({ ...cart, [id]: 0 })}
+                            quantity={props.cart[product.id] ? props.cart[product.id].quantity : 0}
+                            onAdd={id => props.onSetCart({
+                                ...props.cart,
+                                [id]: {
+                                    quantity: props.cart[id] ? props.cart[id].quantity + 1 : 1,
+                                    name: props.productsById[id] ? props.productsById[id].name : 'product not exists',
+                                    price: props.productsById[id] ? props.productsById[id].price : 0,
+                                    image: props.productsById[id] ? props.productsById[id].image : '',
+                                }
+                            })}
+                            onClear={id => props.onSetCart({
+                                ...props.cart,
+                                [id]: {
+                                    quantity: 0,
+                                    name: props.productsById[id] ? props.productsById[id].name : 'product not exists',
+                                    price: props.productsById[id] ? props.productsById[id].price : 0,
+                                    image: props.productsById[id] ? props.productsById[id].image : '',
+                                }
+                            })}
                         />
                     </Grid>
                 ))}

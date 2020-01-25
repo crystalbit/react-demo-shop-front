@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Chip from '@material-ui/core/Chip';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
@@ -11,19 +12,7 @@ const useStyles = makeStyles(theme => ({
         zIndex: 100,
         [theme.breakpoints.down('xs')]: {
             bottom: 30
-        },
-        [theme.breakpoints.down('sm')]: {
-
         }
-    },
-    rootBottom: {
-        position: 'fixed',
-        bottom: 0,
-        width: '100%',
-        zIndex: 101,
-        borderTop: 1,
-        borderTopStyle: 'solid',
-        borderColor: 'black'
     }
 }));
 
@@ -32,7 +21,7 @@ export default function(props) {
 
     return(
         <React.Fragment>
-            <Box component="div" display={{ xs: 'block', sm: 'block' }}>
+            <Box component={Link} to="/checkout">
                 <Chip
                     className={classes.rootChip}
                     icon={<ShoppingCartIcon />}
