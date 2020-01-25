@@ -6,7 +6,8 @@ import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
-import { Typography } from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
+import helpers from '../../Helpers';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -43,7 +44,13 @@ const useStyles = makeStyles(theme => ({
 
 export default function(props) {
     const classes = useStyles();
-    const [ mask, setMask ] = useState('(   )    -    ');
+    const [ client, setClient ] = helpers.useLocalStorage('client', {
+        name: '',
+        address: '',
+        email: '',
+        phone: ''
+    });
+    const [ mask, setMask ] = useState(client.phone || '(   )    -    ');
 
     let subtotal = 0;
     for (let id of Object.keys(props.cart)) {
@@ -75,6 +82,10 @@ export default function(props) {
                     <TextField
                         id="name"
                         required
+                        InputProps={{
+                            value: client.name,
+                            onChange: event => setClient({ ...client, name: event.target.value}),
+                        }}
                         label="Name"
                         style={{ margin: 8 }}
                         fullWidth
@@ -84,6 +95,10 @@ export default function(props) {
                     <TextField
                         id="address"
                         required
+                        InputProps={{
+                            value: client.address,
+                            onChange: event => setClient({ ...client, address: event.target.value}),
+                        }}
                         label="Delivery address"
                         style={{ margin: 8 }}
                         fullWidth
@@ -93,6 +108,10 @@ export default function(props) {
                     <div>
                         <TextField
                             id="email"
+                            InputProps={{
+                                value: client.email,
+                                onChange: event => setClient({ ...client, email: event.target.value}),
+                            }}
                             label="Your email"
                             style={{ margin: 8 }}
                             margin="normal"
@@ -104,7 +123,10 @@ export default function(props) {
                             InputProps={{
                                 inputComponent: TextMaskCustom,
                                 value: mask,
-                                onChange: event => setMask(event.target.value),
+                                onChange: event => {
+                                    setMask(event.target.value);
+                                    setClient({ ...client, phone: mask})
+                                },
                             }}
                             label="Phone number"
                             style={{ margin: 8 }}
