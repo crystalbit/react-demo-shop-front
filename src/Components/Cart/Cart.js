@@ -13,8 +13,8 @@ export default function(props) {
 
     return(
         <React.Fragment>
-            <Grid container spacing={2}>
-                <Grid item xs={12} sm={6}>
+            <Grid container spacing={2} justify="space-around">
+                <Grid item xs={12} sm={6} className={classes.leftItem}>
                     {props.cart ? Object.keys(props.cart).map(id => props.cart[id] && props.cart[id].quantity > 0 ? (
                         <Element
                             key={id}

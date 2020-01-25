@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Chip from '@material-ui/core/Chip';
 import AutorenewIcon from '@material-ui/icons/Autorenew';
@@ -21,8 +21,6 @@ const useStyles = makeStyles(theme => ({
 
 function ProductList(props) {
     const classes = useStyles();
-
-
 
     if (props.error) return (
         <div className={classes.center}>
