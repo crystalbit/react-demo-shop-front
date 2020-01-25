@@ -32,7 +32,6 @@ function ProductList(props) {
      */
     const [ cart, setCart ] = useState({});
 
-    const [ loading, setLoading ] = useState(true);
     const [ error, setError ] = useState(false);
     const [ products, setProducts ] = useState([]);
     const [ productsById, setProductsById ] = useState([]);
@@ -46,7 +45,7 @@ function ProductList(props) {
                 setError(true);
             } else {
                 setError(false);
-                setLoading(false);
+                props.onLoadingChange(false);
                 setProducts(products);
                 let productsObject = {};
                 products.forEach(product => {
@@ -56,7 +55,7 @@ function ProductList(props) {
             }
         })
         .catch(() => setError(true));
-    }, [updates]);
+    }, [props, updates]);
 
     if (error) return (
         <div className={classes.center}>
@@ -70,7 +69,7 @@ function ProductList(props) {
         </div>
     );
 
-    if (loading) return (
+    if (props.loading) return (
         <div className={classes.center}>
             <CircularProgress />
         </div>
