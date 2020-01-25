@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export default {
+class Helpers {
     /**
      * usehooks.com/useLocalStorage/
      */
@@ -40,3 +40,5 @@ export default {
         return [storedValue, setValue];
     }
 }
+
+export default new Helpers();

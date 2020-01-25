@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import helpers from '../Helpers';
 import api from '../Api';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Chip from '@material-ui/core/Chip';
@@ -30,7 +31,7 @@ function ProductList(props) {
      *   ...
      * }
      */
-    const [ cart, setCart ] = useState({});
+    const [ cart, setCart ] = helpers.useLocalStorage('cart', {});
 
     const [ error, setError ] = useState(false);
     const [ products, setProducts ] = useState([]);
@@ -77,7 +78,7 @@ function ProductList(props) {
 
     let cartSum = 0;
     for (let i of Object.keys(cart)) {
-        cartSum = cartSum + productsById[i].price * cart[i];
+        cartSum = cartSum + (productsById[i] ? productsById[i].price : 0) * cart[i];
     }
 
     return(
