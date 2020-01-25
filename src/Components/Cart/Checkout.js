@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import PropTypes from 'prop-types';
-import MaskedInput from 'react-text-mask';
+import TextMaskCustom from '../Shared/TextMaskCustom';
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -41,26 +40,6 @@ const useStyles = makeStyles(theme => ({
         textAlign: 'right'
     }
 }));
-
-function TextMaskCustom(props) {
-    const { inputRef, ...other } = props;
-  
-    return (
-      <MaskedInput
-        {...other}
-        ref={ref => {
-          inputRef(ref ? ref.inputElement : null);
-        }}
-        mask={['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
-        placeholderChar={'\u2000'}
-        showMask
-      />
-    );
-}
-
-TextMaskCustom.propTypes = {
-    inputRef: PropTypes.func.isRequired,
-};
 
 export default function(props) {
     const classes = useStyles();
