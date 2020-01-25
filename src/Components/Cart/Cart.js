@@ -54,7 +54,9 @@ export default function(props) {
                     ) : ''}
                 </Grid>
                 <Grid item sm={12} md={6}>
-                    <Checkout />
+                    <Checkout
+                        cart={props.cart}
+                    />
                 </Grid>
             </Grid>
         </React.Fragment>
