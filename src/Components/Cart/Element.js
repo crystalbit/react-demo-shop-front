@@ -7,6 +7,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
+import ButtonBase from '@material-ui/core/ButtonBase';
 import Typography from '@material-ui/core/Typography';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
@@ -15,38 +16,84 @@ import config from '../../config';
 import path from 'path';
 
 const useStyles = makeStyles(theme => ({
-    card: {
-        display: 'flex',
-        //flexDirection: 'column',
-        //justifyContent: 'space-between'
-        alignItems: 'center'
-    },
-    name: {
-        marginLeft: 5
-    },
-    controls: {
-        textAlign: 'right'
-    },
-    // details: {
-    //     display: 'flex',
-        
-    // },
-    cover: {
-        width: 280 / 2,
-        height: 100,
-        display: 'flex'
-    },
-    content: {
-        display: 'flex',
-        flex: '1 0 auto',
-    },
-    btngroup: {
-        marginLeft: 10
-    }
+    root: {
+        flexGrow: 1,
+        marginBottom: 5
+      },
+      paper: {
+        padding: theme.spacing(2),
+        margin: 'auto',
+        maxWidth: 500,
+      },
+      image: {
+        width: 128,
+        height: 90,
+      },
+      img: {
+        margin: 'auto',
+        display: 'block',
+        maxWidth: '100%',
+        maxHeight: '100%',
+      },
 }));
 
 export default function(props) {
     const classes = useStyles();
+
+    return (
+   <div className={classes.root}>
+      <Paper className={classes.paper}>
+        <Grid container spacing={2}>
+          <Grid item>
+            <div className={classes.image}>
+              <img className={classes.img} alt={props.name} src={path.join(config.directories.images, props.image)} />
+            </div>
+            <div>
+                <ButtonGroup className={classes.btngroup}>
+                    <Button
+                        aria-label="reduce"
+                        onClick={() => props.onLess(props.id)}
+                    >
+                        <RemoveIcon fontSize="small" />
+                    </Button>
+                    <Button
+                        aria-label="increase"
+                        onClick={() => props.onMore(props.id)}
+                    >
+                        <AddIcon fontSize="small" />
+                    </Button>
+                </ButtonGroup>
+            </div>
+          </Grid>
+          <Grid item xs={12} sm container>
+            <Grid item xs container direction="column" spacing={2}>
+              <Grid item xs>
+                <Typography gutterBottom variant="subtitle1">
+                    {props.name}
+                </Typography>
+                <Typography variant="body2" gutterBottom>
+                    {props.quantity} x ${props.price} = ${(props.quantity * props.price).toFixed(2)}
+                </Typography>
+                <Typography variant="body2" color="textSecondary">
+
+                </Typography>
+              </Grid>
+              <Grid item>
+                <Button variant="outlined" onClick={() => props.onDelete(props.id)}>
+                  Remove
+                </Button>
+              </Grid>
+            </Grid>
+            <Grid item>
+              <Typography variant="subtitle1">
+                ${(props.quantity * props.price).toFixed(2)}
+              </Typography>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Paper>
+    </div>
+    );
 
     return(
         <React.Fragment>
@@ -89,7 +136,7 @@ export default function(props) {
                                     </Button>
                                 </ButtonGroup>
                             </Typography>
-                            <Typography variant="subtitle1" color="textSecondary">
+                            <Typography variant="h6" color="textPrimary" className={classes.pricing}>
                                 {props.quantity} x ${props.price} = ${(props.quantity * props.price).toFixed(2)}
                             </Typography>
                         </Grid>

@@ -12,9 +12,6 @@ const useStyles = makeStyles(theme => ({
         zIndex: 100,
         [theme.breakpoints.down('xs')]: {
             bottom: 30
-        },
-        [theme.breakpoints.down('sm')]: {
-
         }
     }
 }));
