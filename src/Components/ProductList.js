@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import helpers from '../Helpers';
 import api from '../Api';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Chip from '@material-ui/core/Chip';
@@ -24,20 +23,10 @@ const useStyles = makeStyles(theme => ({
 function ProductList(props) {
     const classes = useStyles();
 
-    /**
-     * cart object is like
-     * {
-     *   id: quantity,
-     *   ...
-     * }
-     */
-    const [ cart, setCart ] = helpers.useLocalStorage('cart', {});
-
     const [ error, setError ] = useState(false);
     const [ products, setProducts ] = useState([]);
     const [ productsById, setProductsById ] = useState([]);
     const [ updates, invokeUpdate ] = useState(0);
-
 
     useEffect(() => {
         api.getProducts()
@@ -77,8 +66,8 @@ function ProductList(props) {
     );
 
     let cartSum = 0;
-    for (let i of Object.keys(cart)) {
-        cartSum = cartSum + (productsById[i] ? productsById[i].price : 0) * cart[i];
+    for (let i of Object.keys(props.cart)) {
+        cartSum = cartSum + (productsById[i] ? productsById[i].price : 0) * props.cart[i];
     }
 
     return(
@@ -91,9 +80,9 @@ function ProductList(props) {
                     <Grid item key={product.code} className={classes.grid}>
                         <Product 
                             product={product}
-                            quantity={cart[product.id] || 0}
-                            onAdd={id => setCart({ ...cart, [id]: (cart[id] || 0) + 1 })}
-                            onClear={id => setCart({ ...cart, [id]: 0 })}
+                            quantity={props.cart[product.id] || 0}
+                            onAdd={id => props.onSetCart({ ...props.cart, [id]: (props.cart[id] || 0) + 1 })}
+                            onClear={id => props.onSetCart({ ...props.cart, [id]: 0 })}
                         />
                     </Grid>
                 ))}
