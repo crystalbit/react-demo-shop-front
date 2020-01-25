@@ -5,6 +5,7 @@ import Chip from '@material-ui/core/Chip';
 import AutorenewIcon from '@material-ui/icons/Autorenew';
 import { makeStyles } from '@material-ui/core/styles';
 import Product from './Product';
+import CartThumbnail from './Cart/Thumbnail';
 import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles(theme => ({
@@ -22,8 +23,18 @@ const useStyles = makeStyles(theme => ({
 function ProductList(props) {
     const classes = useStyles();
 
+    /**
+     * cart object is like
+     * {
+     *   id: quantity,
+     *   ...
+     * }
+     */
+    const [ cart, setCart ] = useState({});
+
     const [ error, setError ] = useState(false);
     const [ products, setProducts ] = useState([]);
+    const [ productsById, setProductsById ] = useState([]);
     const [ updates, invokeUpdate ] = useState(0);
 
 
@@ -36,6 +47,11 @@ function ProductList(props) {
                 setError(false);
                 props.onLoadingChange(false);
                 setProducts(products);
+                let productsObject = {};
+                products.forEach(product => {
+                    productsObject[product.id] = product;
+                })
+                setProductsById(productsObject);
             }
         })
         .catch(() => setError(true));
@@ -59,17 +75,29 @@ function ProductList(props) {
         </div>
     );
 
+    let cartSum = 0;
+    for (let i of Object.keys(cart)) {
+        cartSum = cartSum + productsById[i].price * cart[i];
+    }
+
     return(
-        <Grid container justify="center" spacing={2}>
-            {products.map(product => (
-                <Grid item key={product.code} className={classes.grid}>
-                    <Product 
-                        product={product}
-                        
-                    />
-                </Grid>
-            ))}
-        </Grid>
+        <React.Fragment>
+            {cartSum ? <CartThumbnail
+                sum={cartSum}
+            /> : ''}
+            <Grid container justify="center" spacing={2}>
+                {products.map(product => (
+                    <Grid item key={product.code} className={classes.grid}>
+                        <Product 
+                            product={product}
+                            quantity={cart[product.id] || 0}
+                            onAdd={id => setCart({ ...cart, [id]: (cart[id] || 0) + 1 })}
+                            onClear={id => setCart({ ...cart, [id]: 0 })}
+                        />
+                    </Grid>
+                ))}
+            </Grid>
+        </React.Fragment>
     );
 }
 
