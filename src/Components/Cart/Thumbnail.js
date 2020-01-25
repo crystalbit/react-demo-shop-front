@@ -2,13 +2,19 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Chip from '@material-ui/core/Chip';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import { BottomNavigation, BottomNavigationAction, Box } from '@material-ui/core';
+import Box from '@material-ui/core/Box';
 
 const useStyles = makeStyles(theme => ({
     rootChip: {
         position: 'fixed',
         right: 30,
-        zIndex: 100
+        zIndex: 100,
+        [theme.breakpoints.down('xs')]: {
+            bottom: 30
+        },
+        [theme.breakpoints.down('sm')]: {
+
+        }
     },
     rootBottom: {
         position: 'fixed',
@@ -26,16 +32,7 @@ export default function(props) {
 
     return(
         <React.Fragment>
-            <Box component="div" display={{ xs: 'block', sm: 'none' }}>
-                <BottomNavigation
-                    value={0}
-                    showLabels
-                    className={classes.rootBottom}
-                >
-                    <BottomNavigationAction label={'$' + (props.sum || 0).toFixed(2)} icon={<ShoppingCartIcon />} />
-                </BottomNavigation>
-            </Box>
-            <Box component="div" display={{ xs: 'none', sm: 'block' }}>
+            <Box component="div" display={{ xs: 'block', sm: 'block' }}>
                 <Chip
                     className={classes.rootChip}
                     icon={<ShoppingCartIcon />}
