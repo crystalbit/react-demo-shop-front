@@ -26,7 +26,7 @@ const useStyles = makeStyles(theme => ({
       flex: 1
     },
     actions: {
-      display:'flex',
+      display: 'flex',
       justifyContent: 'space-between',
       paddingRight: '12px'
     },
