@@ -59,7 +59,7 @@ export default function(props) {
     const [ confirmModalVisible, showConfirmModal ] = useState(false);
 
     const subtotal = getSubtotal(props.cart);
-    const delivery = subtotal >= 50 ? 0 : 5;
+    const delivery_cost = subtotal >= 50 ? 0 : 5;
 
     return (
         <div className={classes.root}>
@@ -73,12 +73,12 @@ export default function(props) {
                         Subtotal: ${subtotal}
                     </Typography>
                     <Typography variant="h5">
-                        Delivery: ${delivery}
+                        Delivery: ${delivery_cost}
                     </Typography>
                     <Typography variant="h3">
-                        Total: ${subtotal + delivery}
+                        Total: ${subtotal + delivery_cost}
                     </Typography>
-                    {delivery ? (
+                    {delivery_cost ? (
                         <Typography variant="caption">
                             we offer free delivery for orders starting from $50
                         </Typography>
@@ -159,7 +159,7 @@ export default function(props) {
                                 if (
                                     validation.name || validation.address || validation.phone || validation.email
                                 ) return;
-                                Api.postOrder(client, props.cart).then(result => {
+                                Api.postOrder(client, { delivery_cost }, props.cart).then(result => {
                                     if (result.success) {
                                         showConfirmModal(true);
                                         props.onClearCart();

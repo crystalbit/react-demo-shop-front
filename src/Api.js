@@ -49,8 +49,8 @@ class Api {
      * post order with client data
      * @return {Promise} The result of fetch
      */
-    postOrder(client, order) {
-        return this.POST('orders/push', { client, order })
+    postOrder(client, options, positions) {
+        return this.POST('orders/push', { client, options, positions })
         .then(response => response.json());
     }
 }
