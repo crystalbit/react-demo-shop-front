@@ -25,7 +25,6 @@ function App() {
   const [ updates, invokeUpdate ] = useState(0);
   const [ error, setError ] = useState(false);
 
-
   useEffect(() => {
       api.getProducts()
       .then(products => {
