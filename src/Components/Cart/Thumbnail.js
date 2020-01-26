@@ -27,7 +27,7 @@ export default function(props) {
                     icon={<ShoppingCartIcon />}
                     label={'$' + (props.sum || 0).toFixed(2)}
                     clickable
-                    color="primary"
+                    color="secondary"
                 />
             </Box>
         </React.Fragment>
