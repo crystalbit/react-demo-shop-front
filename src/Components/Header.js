@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 //import Button from '@material-ui/core/Button';
 import Avatar from '@material-ui/core/Avatar';
 import logo from '../images/ninja.gif';
+import Strings from '../Helpers/Strings';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -34,9 +35,9 @@ export default function(props) {
         <div className={classes.root}>
             <AppBar position="static">
                 <Toolbar className={classes.toolbar}>
-                    <Avatar alt="Circle Pizza Logo" src={logo} className={classes.logo} />
+                    <Avatar alt={Strings.shop.name} src={logo} className={classes.logo} />
                     <Typography variant="h6">
-                        Ninja Pizza!
+                        {Strings.shop.name}
                     </Typography>
                     {/* <Button color="inherit">Login</Button> */}
                 </Toolbar>

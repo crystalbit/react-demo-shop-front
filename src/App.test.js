@@ -1,9 +1,10 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import App from './App';
+import Strings from './Helpers/Strings';
 
-test('renders learn react link', () => {
+test('renders App and checks the title', () => {
   const { getByText } = render(<App />);
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  const titleText = getByText(new RegExp(Strings.shop.name));
+  expect(titleText).toBeInTheDocument();
 });
