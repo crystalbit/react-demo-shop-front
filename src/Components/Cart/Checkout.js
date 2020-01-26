@@ -9,7 +9,8 @@ import Divider from '@material-ui/core/Divider';
 import Typography from '@material-ui/core/Typography';
 import useLocalStorage from '../../Helpers/useLocalStorage';
 import validateClient from '../../Helpers/validateClient';
-import Api from '../../Api.js';
+import Api from '../../Api';
+import Confirm from '../Confirm';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -54,6 +55,7 @@ export default function(props) {
     });
     const [ validationData, setValidationData ] = useState({});
     const [ mask, setMask ] = useState(client.phone || '(   )    -    ');
+    const [ confirmModalVisible, showConfirmModal ] = useState(false);
 
     let subtotal = 0;
     for (let id of Object.keys(props.cart)) {
@@ -63,6 +65,10 @@ export default function(props) {
 
     return (
         <div className={classes.root}>
+            <Confirm
+                open={confirmModalVisible}
+                onShowModal={showConfirmModal}
+            />
             <Paper className={classes.paper}>
                 <div className={classes.costData}>
                     <Typography variant="h5">
@@ -157,7 +163,7 @@ export default function(props) {
                                 ) return;
                                 Api.postOrder(client, props.cart).then(result => {
                                     if (result.success) {
-                                        alert('We just began to make the GREATEST PIZZA IN THE WORLD for you, my dear friend');
+                                        showConfirmModal(true);
                                         props.onClearCart();
                                     }
                                 });
