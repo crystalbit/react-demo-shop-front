@@ -3,7 +3,7 @@ import { Switch, BrowserRouter as Router, Route } from "react-router-dom";
 import './App.css';
 import api from './Api';
 
-import helpers from './Helpers';
+import useLocalStorage from './Helpers/useLocalStorage';
 import Header from './Components/Header';
 import ProductFooter from './Components/ProductFooter';
 import ProductList from './Components/ProductList';
@@ -19,7 +19,7 @@ function App() {
    *   ...
    * }
    */
-  const [ cart, setCart ] = helpers.useLocalStorage('cart', {});
+  const [ cart, setCart ] = useLocalStorage('cart', {});
   const [ products, setProducts ] = useState([]);
   const [ productsById, setProductsById ] = useState([]);
   const [ updates, invokeUpdate ] = useState(0);

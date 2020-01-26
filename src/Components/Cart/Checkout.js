@@ -7,7 +7,8 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 import Typography from '@material-ui/core/Typography';
-import helpers from '../../Helpers';
+import useLocalStorage from '../../Helpers/useLocalStorage';
+import validateClient from '../../Helpers/validateClient';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -44,12 +45,13 @@ const useStyles = makeStyles(theme => ({
 
 export default function(props) {
     const classes = useStyles();
-    const [ client, setClient ] = helpers.useLocalStorage('client', {
+    const [ client, setClient ] = useLocalStorage('client', {
         name: '',
         address: '',
         email: '',
         phone: ''
     });
+    const [ validationData, setValidationData ] = useState({});
     const [ mask, setMask ] = useState(client.phone || '(   )    -    ');
 
     let subtotal = 0;
@@ -82,6 +84,8 @@ export default function(props) {
                     <TextField
                         id="name"
                         required
+                        error={!!validationData.name}
+                        helperText={validationData.name || null}
                         InputProps={{
                             value: client.name,
                             onChange: event => setClient({ ...client, name: event.target.value}),
@@ -95,6 +99,8 @@ export default function(props) {
                     <TextField
                         id="address"
                         required
+                        error={!!validationData.address}
+                        helperText={validationData.address || null}
                         InputProps={{
                             value: client.address,
                             onChange: event => setClient({ ...client, address: event.target.value}),
@@ -108,6 +114,8 @@ export default function(props) {
                     <div>
                         <TextField
                             id="email"
+                            error={!!validationData.email}
+                            helperText={validationData.email || null}
                             InputProps={{
                                 value: client.email,
                                 onChange: event => setClient({ ...client, email: event.target.value}),
@@ -120,6 +128,8 @@ export default function(props) {
                         <TextField
                             id="phone"
                             required
+                            error={!!validationData.phone}
+                            helperText={validationData.phone || null}
                             InputProps={{
                                 inputComponent: TextMaskCustom,
                                 value: mask,
@@ -135,10 +145,17 @@ export default function(props) {
                         />
                         <Button
                             aria-label="Make an order"
-                            onClick={() => alert('wassup')}
                             color="primary"
                             variant="outlined"
                             className={classes.orderButton}
+                            onClick={() => {
+                                const validation = validateClient(client);
+                                setValidationData(validation);
+                                if (
+                                    validation.name || validation.address || validation.phone || validation.email
+                                ) return;
+                                // TODO SEND HERE
+                            }}
                         >
                             Make an order
                         </Button>

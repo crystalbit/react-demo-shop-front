@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import MaskedInput from 'react-text-mask';
+import phoneMask from '../../Helpers/phoneMask';
 
 function TextMaskCustom(props) {
     const { inputRef, ...other } = props;
@@ -11,7 +12,7 @@ function TextMaskCustom(props) {
         ref={ref => {
           inputRef(ref ? ref.inputElement : null);
         }}
-        mask={['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
+        mask={phoneMask}
         placeholderChar={'\u2000'}
         showMask
       />
