@@ -56,6 +56,7 @@ export default function(props) {
                 <Grid item sm={12} md={6}>
                     <Checkout
                         cart={props.cart}
+                        onClearCart={() => props.onSetCart({})}
                     />
                 </Grid>
             </Grid>

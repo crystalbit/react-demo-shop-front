@@ -9,6 +9,7 @@ import Divider from '@material-ui/core/Divider';
 import Typography from '@material-ui/core/Typography';
 import useLocalStorage from '../../Helpers/useLocalStorage';
 import validateClient from '../../Helpers/validateClient';
+import Api from '../../Api.js';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -154,7 +155,12 @@ export default function(props) {
                                 if (
                                     validation.name || validation.address || validation.phone || validation.email
                                 ) return;
-                                // TODO SEND HERE
+                                Api.postOrder(client, props.cart).then(result => {
+                                    if (result.success) {
+                                        alert('We just began to make the GREATEST PIZZA IN THE WORLD for you, my dear friend');
+                                        props.onClearCart();
+                                    }
+                                });
                             }}
                         >
                             Make an order
