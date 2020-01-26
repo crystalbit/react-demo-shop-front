@@ -7,6 +7,8 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 import Typography from '@material-ui/core/Typography';
+import Snackbar from '@material-ui/core/Snackbar';
+import Alert from '@material-ui/lab/Alert/Alert';
 import useLocalStorage from '../../Helpers/useLocalStorage';
 import validateClient from '../../Helpers/validateClient';
 import getSubtotal from '../../Helpers/getSubtotal';
@@ -57,6 +59,8 @@ export default function(props) {
     const [ validationData, setValidationData ] = useState({});
     const [ mask, setMask ] = useState(client.phone || '+7 (   )    -    ');
     const [ confirmModalVisible, showConfirmModal ] = useState(false);
+    const [ showErrorMessage, toggleErrorMessage ] = useState(false);
+    const [ errorMessage, setErrorMessage ] = useState('Unknown error');
 
     const subtotal = getSubtotal(props.cart);
     const delivery_cost = subtotal >= 50 ? 0 : 5;
@@ -67,6 +71,11 @@ export default function(props) {
                 open={confirmModalVisible}
                 onShowModal={showConfirmModal}
             />
+            <Snackbar open={showErrorMessage} autoHideDuration={6000} onClose={() => toggleErrorMessage(false)}>
+                <Alert onClose={() => toggleErrorMessage(false)} severity="error" elevation={6} variant="filled">
+                    {errorMessage}
+                </Alert>
+            </Snackbar>
             <Paper className={classes.paper}>
                 <div className={classes.costData}>
                     <Typography variant="h5">
@@ -163,6 +172,9 @@ export default function(props) {
                                     if (result.success) {
                                         showConfirmModal(true);
                                         props.onClearCart();
+                                    } else {
+                                        setErrorMessage(result.msg || 'Unknown error');
+                                        toggleErrorMessage(true);
                                     }
                                 });
                             }}
