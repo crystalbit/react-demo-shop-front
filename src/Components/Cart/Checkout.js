@@ -78,14 +78,18 @@ export default function(props) {
             </Snackbar>
             <Paper className={classes.paper}>
                 <div className={classes.costData}>
-                    <Typography variant="h5">
-                        Subtotal: ${subtotal}
-                    </Typography>
-                    <Typography variant="h5">
-                        Delivery: ${delivery_cost}
-                    </Typography>
+                    {subtotal ? (
+                        <React.Fragment>
+                            <Typography variant="h5">
+                                Subtotal: ${subtotal}
+                            </Typography>
+                            <Typography variant="h5">
+                                Delivery: ${delivery_cost}
+                            </Typography>
+                        </React.Fragment>
+                    ) : ''}
                     <Typography variant="h3">
-                        Total: ${subtotal + delivery_cost}
+                        Total: ${subtotal ? subtotal + delivery_cost : 0}
                     </Typography>
                     {delivery_cost ? (
                         <Typography variant="caption">
