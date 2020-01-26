@@ -3,9 +3,22 @@ import { makeStyles } from '@material-ui/core/styles';
 import Element from './Element';
 import Checkout from './Checkout';
 import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+import getSubtotal from '../../Helpers/getSubtotal';
 
 const useStyles = makeStyles(theme => ({
-
+    emptyCart: {
+        flexGrow: 1,
+        height: 150,
+        padding: 20,
+        marginLeft: 8
+    },
+    leftItem: {
+        
+    },
+    rightItem: {
+        
+    }
 }));
 
 export default function(props) {
@@ -15,6 +28,11 @@ export default function(props) {
         <React.Fragment>
             <Grid container spacing={2} justify="space-around">
                 <Grid item xs={12} sm={6} className={classes.leftItem}>
+                    {props.cart && !getSubtotal(props.cart) ? (
+                        <Paper className={classes.emptyCart}>
+                            Cart is empty
+                        </Paper>
+                    ) : ''}
                     {props.cart ? Object.keys(props.cart).map(id => props.cart[id] && props.cart[id].quantity > 0 ? (
                         <Element
                             key={id}
@@ -53,7 +71,7 @@ export default function(props) {
                         />) : ''
                     ) : ''}
                 </Grid>
-                <Grid item sm={12} md={6}>
+                <Grid item xs={12} sm={6}>
                     <Checkout
                         cart={props.cart}
                         onClearCart={() => props.onSetCart({})}

@@ -9,7 +9,8 @@ import logo from '../images/ninja.gif';
 
 const useStyles = makeStyles(theme => ({
     root: {
-      marginBottom: 20
+      marginBottom: 20,
+      marginRight: -10
     },
     menuButton: {
       marginRight: theme.spacing(2),

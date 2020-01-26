@@ -9,13 +9,14 @@ import Divider from '@material-ui/core/Divider';
 import Typography from '@material-ui/core/Typography';
 import useLocalStorage from '../../Helpers/useLocalStorage';
 import validateClient from '../../Helpers/validateClient';
+import getSubtotal from '../../Helpers/getSubtotal';
 import Api from '../../Api.js';
 
 const useStyles = makeStyles(theme => ({
     root: {
         display: 'flex',
         flexWrap: 'wrap',
-        marginRight: 20
+        marginLeft: 8
     },
     paper: {
         padding: theme.spacing(2),
@@ -55,10 +56,7 @@ export default function(props) {
     const [ validationData, setValidationData ] = useState({});
     const [ mask, setMask ] = useState(client.phone || '(   )    -    ');
 
-    let subtotal = 0;
-    for (let id of Object.keys(props.cart)) {
-        subtotal = subtotal + props.cart[id].price * props.cart[id].quantity;
-    }
+    const subtotal = getSubtotal(props.cart);
     const delivery = subtotal >= 50 ? 0 : 5;
 
     return (
