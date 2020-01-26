@@ -54,7 +54,7 @@ export default function(props) {
         phone: ''
     });
     const [ validationData, setValidationData ] = useState({});
-    const [ mask, setMask ] = useState(client.phone || '(   )    -    ');
+    const [ mask, setMask ] = useState(client.phone || '+7 (   )    -    ');
 
     const subtotal = getSubtotal(props.cart);
     const delivery = subtotal >= 50 ? 0 : 5;
@@ -134,7 +134,7 @@ export default function(props) {
                                 value: mask,
                                 onChange: event => {
                                     setMask(event.target.value);
-                                    setClient({ ...client, phone: mask})
+                                    setClient({ ...client, phone: event.target.value})
                                 },
                             }}
                             label="Phone number"
