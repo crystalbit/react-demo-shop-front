@@ -59,6 +59,7 @@ function ProductList(props) {
                             onAdd={id => props.onSetCart({
                                 ...props.cart,
                                 [id]: {
+                                    id: id,
                                     quantity: props.cart[id] ? props.cart[id].quantity + 1 : 1,
                                     name: props.productsById[id] ? props.productsById[id].name : 'product not exists',
                                     price: props.productsById[id] ? props.productsById[id].price : 0,
@@ -68,6 +69,7 @@ function ProductList(props) {
                             onClear={id => props.onSetCart({
                                 ...props.cart,
                                 [id]: {
+                                    id: id,
                                     quantity: 0,
                                     name: props.productsById[id] ? props.productsById[id].name : 'product not exists',
                                     price: props.productsById[id] ? props.productsById[id].price : 0,
