@@ -13,26 +13,26 @@ import config from '../config';
 import path from 'path';
 
 const useStyles = makeStyles(theme => ({
-    card: {
-      width: 280,
-      display: 'flex',
-      flexDirection: 'column'
-    },
-    media: {
-      height: 0,
-      paddingTop: '56.25%'
-    },
-    content: {
-      flex: 1
-    },
-    actions: {
-      display: 'flex',
-      justifyContent: 'space-between',
-      paddingRight: '12px'
-    },
-    actionsTypography: {
-      marginBottom: '5px'
-    }
+  card: {
+    width: 280,
+    display: 'flex',
+    flexDirection: 'column'
+  },
+  media: {
+    height: 0,
+    paddingTop: '56.25%'
+  },
+  content: {
+    flex: 1
+  },
+  actions: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    paddingRight: '12px'
+  },
+  actionsTypography: {
+    marginBottom: '5px'
+  }
 }));
 
 function Product(props) {

@@ -11,32 +11,32 @@ import config from '../../config';
 import path from 'path';
 
 const useStyles = makeStyles(theme => ({
-    root: {
-        flexGrow: 1,
-        marginBottom: 5,
-        marginLeft: 8
-      },
-      paper: {
-        padding: theme.spacing(2),
-        margin: 'auto'
-      },
-      image: {
-        width: 128,
-        height: 90,
-      },
-      img: {
-        margin: 'auto',
-        display: 'block',
-        maxWidth: '100%',
-        maxHeight: '100%',
-      },
+  root: {
+      flexGrow: 1,
+      marginBottom: 5,
+      marginLeft: 8
+    },
+    paper: {
+      padding: theme.spacing(2),
+      margin: 'auto'
+    },
+    image: {
+      width: 128,
+      height: 90,
+    },
+    img: {
+      margin: 'auto',
+      display: 'block',
+      maxWidth: '100%',
+      maxHeight: '100%',
+    }
 }));
 
 export default function(props) {
-    const classes = useStyles();
+  const classes = useStyles();
 
-    return (
-   <div className={classes.root}>
+  return (
+    <div className={classes.root}>
       <Paper className={classes.paper}>
         <Grid container spacing={2}>
           <Grid item>
@@ -44,33 +44,30 @@ export default function(props) {
               <img className={classes.img} alt={props.name} src={path.join(config.directories.images, props.image)} />
             </div>
             <div>
-                <ButtonGroup className={classes.btngroup}>
-                    <Button
-                        aria-label="reduce"
-                        onClick={() => props.onLess(props.id)}
-                    >
-                        <RemoveIcon fontSize="small" />
-                    </Button>
-                    <Button
-                        aria-label="increase"
-                        onClick={() => props.onMore(props.id)}
-                    >
-                        <AddIcon fontSize="small" />
-                    </Button>
-                </ButtonGroup>
+              <ButtonGroup className={classes.btngroup}>
+                <Button
+                  aria-label="reduce"
+                  onClick={() => props.onLess(props.id)}
+                >
+                  <RemoveIcon fontSize="small" />
+                </Button>
+                <Button
+                  aria-label="increase"
+                  onClick={() => props.onMore(props.id)}
+                >
+                  <AddIcon fontSize="small" />
+                </Button>
+              </ButtonGroup>
             </div>
           </Grid>
           <Grid item xs={12} sm container>
             <Grid item xs container direction="column" spacing={2}>
               <Grid item xs>
                 <Typography gutterBottom variant="subtitle1">
-                    {props.name}
+                  {props.name}
                 </Typography>
                 <Typography variant="body2" gutterBottom>
-                    {props.quantity} x ${props.price} = ${(props.quantity * props.price).toFixed(2)}
-                </Typography>
-                <Typography variant="body2" color="textSecondary">
-
+                  {props.quantity} x ${props.price} = ${(props.quantity * props.price).toFixed(2)}
                 </Typography>
               </Grid>
               <Grid item>
@@ -88,5 +85,5 @@ export default function(props) {
         </Grid>
       </Paper>
     </div>
-    );
+  );
 }
