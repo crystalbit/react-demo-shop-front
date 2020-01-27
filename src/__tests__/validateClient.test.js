@@ -1,4 +1,4 @@
-import validateClient from './validateClient';
+import validateClient from '../Helpers/validateClient';
 
 const validClient = {
     name: 'John',

@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header equals its snaphot 1`] = `
+<div
+  className="makeStyles-root-1"
+>
+  <header
+    className="MuiPaper-root MuiAppBar-root MuiAppBar-positionStatic MuiAppBar-colorPrimary MuiPaper-elevation4"
+  >
+    <div
+      className="MuiToolbar-root MuiToolbar-regular makeStyles-toolbar-3 MuiToolbar-gutters"
+    >
+      <div
+        className="MuiAvatar-root MuiAvatar-circle makeStyles-logo-4"
+      >
+        <img
+          alt="Ninja Pizza!"
+          className="MuiAvatar-img"
+          src="ninja.gif"
+        />
+      </div>
+      <h6
+        className="MuiTypography-root MuiTypography-h6"
+      >
+        Ninja Pizza!
+      </h6>
+    </div>
+  </header>
+</div>
+`;
