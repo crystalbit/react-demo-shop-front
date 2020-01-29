@@ -8,6 +8,7 @@ import Header from './Components/Header';
 import ProductFooter from './Components/ProductFooter';
 import ProductList from './Components/ProductList';
 import Cart from './Components/Cart/Cart';
+import Login from './Components/Auth/Login';
 
 function App() {
   const [ loading, isLoading ] = useState(true);
@@ -25,23 +26,30 @@ function App() {
   const [ updates, invokeUpdate ] = useState(0);
   const [ error, setError ] = useState(false);
 
+  const [ client, setClient ] = useLocalStorage({
+    name: null,
+    email: null,
+    address: null,
+    phone: null
+  });
+
   useEffect(() => {
-      api.getProducts()
-      .then(products => {
-          if (!products) {
-              setError(true);
-          } else {
-              setError(false);
-              isLoading(false);
-              setProducts(products);
-              let productsObject = {};
-              products.forEach(product => {
-                  productsObject[product.id] = product;
-              })
-              setProductsById(productsObject);
-          }
-      })
-      .catch(() => setError(true));
+    api.getProducts()
+    .then(products => {
+      if (!products) {
+        setError(true);
+      } else {
+        setError(false);
+        isLoading(false);
+        setProducts(products);
+        let productsObject = {};
+        products.forEach(product => {
+          productsObject[product.id] = product;
+        })
+        setProductsById(productsObject);
+      }
+    })
+    .catch(() => setError(true));
   }, [updates]);
 
   return (
@@ -55,8 +63,15 @@ function App() {
                 onSetCart={setCart}
                 cart={cart}
                 productsById={productsById}
+                client={client}
+                setClient={setClient}
               />
             </Route>
+            <Router exact path="/login">
+              <Login
+
+              />
+            </Router>
             <Route path="/">
               <ProductList
                 onLoadingChange={isLoading}
