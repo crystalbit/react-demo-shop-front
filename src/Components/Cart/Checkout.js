@@ -74,7 +74,11 @@ export default function(props) {
                 Subtotal: ${subtotal}
               </Typography>
               <Typography variant="h5">
-                Delivery: ${delivery_cost}
+                {delivery_cost ? (
+                  'Delivery: $' + delivery_cost
+                ) : (
+                  'Free delivery'
+                )}
               </Typography>
             </React.Fragment>
           ) : ''}
