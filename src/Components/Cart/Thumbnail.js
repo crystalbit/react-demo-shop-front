@@ -20,16 +20,14 @@ export default function(props) {
     const classes = useStyles();
 
     return(
-        <React.Fragment>
-            <Box component={Link} to="/checkout">
-                <Chip
-                    className={classes.rootChip}
-                    icon={<ShoppingCartIcon />}
-                    label={'$' + (props.sum || 0).toFixed(2)}
-                    clickable
-                    color="secondary"
-                />
-            </Box>
-        </React.Fragment>
+        <Box component={Link} to="/checkout">
+            <Chip
+                className={classes.rootChip}
+                icon={<ShoppingCartIcon />}
+                label={'$' + (props.sum || 0).toFixed(2)}
+                clickable
+                color="secondary"
+            />
+        </Box>
     );
 }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Switch, BrowserRouter as Router, Route } from "react-router-dom";
+import { Switch, BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css';
 import api from './Api';
 
@@ -8,46 +8,58 @@ import Header from './Components/Header';
 import ProductFooter from './Components/ProductFooter';
 import ProductList from './Components/ProductList';
 import Cart from './Components/Cart/Cart';
+import LoginAndRegister from './Components/Auth/LoginAndRegister';
+import Api from './Api';
 
 function App() {
   const [ loading, isLoading ] = useState(true);
 
-  /**
-   * cart object is like
-   * {
-   *   id: quantity,
-   *   ...
-   * }
-   */
   const [ cart, setCart ] = useLocalStorage('cart', {});
   const [ products, setProducts ] = useState([]);
   const [ productsById, setProductsById ] = useState([]);
-  const [ updates, invokeUpdate ] = useState(0);
+  const [ productUpdates, invokeProductUpdate ] = useState(0);
   const [ error, setError ] = useState(false);
 
+  const [ loginItem, updateLoginItem ] = useState({ auth: null });
+
+  const [ client, setClient ] = useLocalStorage({
+    name: '',
+    email: '',
+    address: '',
+    phone: ''
+  });
+
+  // check if logged in
   useEffect(() => {
-      api.getProducts()
-      .then(products => {
-          if (!products) {
-              setError(true);
-          } else {
-              setError(false);
-              isLoading(false);
-              setProducts(products);
-              let productsObject = {};
-              products.forEach(product => {
-                  productsObject[product.id] = product;
-              })
-              setProductsById(productsObject);
-          }
-      })
-      .catch(() => setError(true));
-  }, [updates]);
+    Api.logged().then(updateLoginItem);
+  }, []);
+
+  useEffect(() => {
+    api.getProducts()
+    .then(products => {
+      if (!products) {
+        setError(true);
+      } else {
+        setError(false);
+        isLoading(false);
+        setProducts(products);
+        let productsObject = {};
+        products.forEach(product => {
+          productsObject[product.id] = product;
+        })
+        setProductsById(productsObject);
+      }
+    })
+    .catch(() => setError(true));
+  }, [productUpdates]);
 
   return (
-    <Router>
+    <Router forceRefresh={true}>
       <div className="App">
-        <Header />
+        <Header
+          loginItem={loginItem}
+          updateLoginItem={updateLoginItem}
+        />
         <div className="app-body">
           <Switch>
             <Route exact path="/checkout">
@@ -55,8 +67,17 @@ function App() {
                 onSetCart={setCart}
                 cart={cart}
                 productsById={productsById}
+                client={client}
+                setClient={setClient}
+                loginItem={loginItem}
               />
             </Route>
+            <Router exact path="/login">
+              <LoginAndRegister
+                loginItem={loginItem}
+                updateLoginItem={updateLoginItem}
+              />
+            </Router>
             <Route path="/">
               <ProductList
                 onLoadingChange={isLoading}
@@ -66,7 +87,7 @@ function App() {
                 products={products}
                 productsById={productsById}
                 error={error}
-                update={() => invokeUpdate(updates + 1)}
+                update={() => invokeProductUpdate(productUpdates + 1)}
               />
               {loading ? '' : <ProductFooter />}
             </Route>
