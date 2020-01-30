@@ -1,8 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+//import { useHistory, withRouter, Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
+
+import { createBrowserHistory } from 'history';
+const history = createBrowserHistory();
 
 const useStyles = makeStyles(theme => ({
   inner: {
@@ -23,6 +26,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function(props) {
   const classes = useStyles();
+  //const history = useHistory();
 
   return (
     <Paper className={classes.paper}>
@@ -40,8 +44,9 @@ export default function(props) {
       <Button
         variant="outlined"
         color="primary"
-        component={Link}
-        to={{ pathname: '/' }}
+        //component={Link}
+        //to="/"
+        onClick={() => window.location = ('/')}
         className={classes.button}
       >
         Main page
@@ -49,8 +54,7 @@ export default function(props) {
       <Button
         variant="outlined"
         color="primary"
-        component={Link}
-        to="/checkout"
+        onClick={() => window.location = ('/checkout')}
         className={classes.button}
       >
         Cart

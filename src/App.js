@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Switch, BrowserRouter as Router, Route } from "react-router-dom";
+import { Switch, BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css';
 import api from './Api';
 
@@ -54,7 +54,7 @@ function App() {
   }, [productUpdates]);
 
   return (
-    <Router>
+    <Router forceRefresh={true}>
       <div className="App">
         <Header
           loginItem={loginItem}
