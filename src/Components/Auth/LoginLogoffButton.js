@@ -2,7 +2,7 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import Chip from '@material-ui/core/Chip';
 import { Link } from 'react-router-dom';
-import Api from '../Api';
+import Api from '../../Api';
 
 export default function(props) {
     // if logged show logoff

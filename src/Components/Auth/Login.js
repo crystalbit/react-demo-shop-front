@@ -14,27 +14,19 @@ const useStyles = makeStyles(theme => ({
   },
   paper: {
     padding: theme.spacing(1),
-    width: 400
+    maxWidth: 400
   },
   buttonLogin: {
     marginTop: 20
   }
 }));
 
-export default function LoginTab(props) {
+export default function(props) {
   const classes = useStyles();
   const [ email, setEmail ] = useState('');
   const [ password, setPassword ] = useState('');
   const [ errorMessage, setErrorMessage ] = useState('Unknown error');
   const [ showErrorMessage, toggleErrorMessage ] = useState(false);
-
-  if (props.loginItem.auth === true) return (
-    <Paper className={classes.paper}>
-      <div className={classes.inner}>
-        Hi, {props.loginItem.client.name}! You are logged in.
-      </div>
-    </Paper>
-  );
 
   return (
     <Paper className={classes.paper}>
@@ -44,33 +36,31 @@ export default function LoginTab(props) {
             {errorMessage}
           </Alert>
         </Snackbar>
-        <Grid container spacing={8} alignItems="flex-end">
-          <Grid item md={true} sm={true} xs={true}>
-            <TextField
-              id="email"
-              label="email"
-              type="email"
-              fullWidth
-              autoFocus
-              required
-              onChange={event => setEmail(event.target.value)}
-              value={email}
-            />
-          </Grid>
-        </Grid>
-        <Grid container spacing={8} alignItems="flex-end">
-          <Grid item md={true} sm={true} xs={true}>
-            <TextField
-              id="password"
-              label="password"
-              type="password"
-              fullWidth
-              required
-              onChange={event => setPassword(event.target.value)}
-              value={password}
-            />
-          </Grid>
-        </Grid>
+        <TextField
+          id="loginEmail"
+          label="Email"
+          type="email"
+          fullWidth
+          autoFocus
+          required
+          onChange={event => setEmail(event.target.value)}
+          value={email}
+          style={{ margin: 8 }}
+          margin="normal"
+          InputLabelProps={{ shrink: true }}
+        />
+        <TextField
+          id="loginPassword"
+          label="Password"
+          type="password"
+          fullWidth
+          required
+          onChange={event => setPassword(event.target.value)}
+          value={password}
+          style={{ margin: 8 }}
+          margin="normal"
+          InputLabelProps={{ shrink: true }}
+        />
         <Grid container justify="center" style={{ marginTop: '10px' }}>
           <Button
             variant="outlined"

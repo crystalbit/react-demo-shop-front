@@ -83,6 +83,17 @@ class Api {
     return this.POST('auth/login', { email, password })
     .then(it => it.data);
   }
+
+  /**
+   * log in
+   * @param {object} client
+   * @param {string} password
+   * @return {object} auth: bool, client if logged
+   */
+  register(client, password) {
+    return this.POST('auth/register', { ...client, password })
+    .then(it => it.data);
+  }
 }
 
 export default new Api();

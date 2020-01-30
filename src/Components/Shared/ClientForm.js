@@ -16,68 +16,69 @@ export default function (props) {
     <React.Fragment>
       <TextField
         id="name"
+        label="Name"
         required
-        error={!!props.validationData ? props.validationData.name : false}
+        fullWidth
+        error={!!props.validationData ? !!props.validationData.name : false}
         helperText={props.validationData ? props.validationData.name : null || null}
         InputProps={{
           value: props.client && props.client.name,
           onChange: event => setClient({ ...props.client, name: event.target.value})
         }}
-        label="Name"
         style={{ margin: 8 }}
-        fullWidth
         margin="normal"
         InputLabelProps={{ shrink: true }}
       />
       <TextField
         id="address"
+        label="Delivery address"
         required
+        fullWidth
         error={!!props.validationData.address}
         helperText={props.validationData.address || null}
         InputProps={{
           value: props.client && props.client.address,
           onChange: event => setClient({ ...props.client, address: event.target.value}),
         }}
-        label="Delivery address"
         style={{ margin: 8 }}
-        fullWidth
         margin="normal"
         InputLabelProps={{ shrink: true }}
       />
-      <div>
-        <TextField
-          id="email"
-          error={!!props.validationData.email}
-          helperText={props.validationData.email || null}
-          InputProps={{
-            value: props.client && props.client.email,
-            onChange: event => setClient({ ...props.client, email: event.target.value}),
-          }}
-          label="Your email"
-          style={{ margin: 8 }}
-          margin="normal"
-          type="email"
-          InputLabelProps={{ shrink: true }}
-        />
-        <TextField
-          id="phone"
-          required
-          error={!!props.validationData.phone}
-          helperText={props.validationData.phone || null}
-          InputProps={{
-            inputComponent: TextMaskCustom,
-            value: mask,
-            onChange: event => {
-              setMask(event.target.value);
-              setClient({ ...props.client, phone: event.target.value})
-            },
-          }}
-          label="Phone number"
-          style={{ margin: 8 }}
-          margin="normal"
-          InputLabelProps={{ shrink: true }}
-        />
-      </div>
+      <TextField
+        id="email"
+        label="Your email"
+        type="email"
+        fullWidth
+        required
+        error={!!props.validationData.email}
+        helperText={props.validationData.email || null}
+        InputProps={{
+          value: props.client && props.client.email,
+          onChange: event => setClient({ ...props.client, email: event.target.value}),
+        }}
+        style={{ margin: 8 }}
+        margin="normal"
+        InputLabelProps={{ shrink: true }}
+      />
+      <TextField
+        id="phone"
+        label="Phone number"
+        required
+        fullWidth
+        error={!!props.validationData.phone}
+        helperText={props.validationData.phone || null}
+        InputProps={{
+          inputComponent: TextMaskCustom,
+          value: mask,
+          onChange: event => {
+            setMask(event.target.value);
+            setClient({ ...props.client, phone: event.target.value})
+          },
+        }}
+        style={{ margin: 8 }}
+        margin="normal"
+        InputLabelProps={{ shrink: true }}
+      />
     </React.Fragment>
   );
 }

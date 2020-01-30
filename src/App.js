@@ -8,7 +8,8 @@ import Header from './Components/Header';
 import ProductFooter from './Components/ProductFooter';
 import ProductList from './Components/ProductList';
 import Cart from './Components/Cart/Cart';
-import Login from './Components/Auth/Login';
+import LoginAndRegister from './Components/Auth/LoginAndRegister';
+import YouAreLogged from './Components/Auth/YouAreLogged';
 import Api from './Api';
 
 function App() {
@@ -23,10 +24,10 @@ function App() {
   const [ loginItem, updateLoginItem ] = useState({ auth: false });
 
   const [ client, setClient ] = useLocalStorage({
-    name: null,
-    email: null,
-    address: null,
-    phone: null
+    name: '',
+    email: '',
+    address: '',
+    phone: ''
   });
 
   // check if logged in
@@ -74,10 +75,18 @@ function App() {
             </Route>
             <Router exact path="/login">
               <div style={{textAlign:'center'}}>
-                <Login
-                  loginItem={loginItem}
-                  updateLoginItem={updateLoginItem}
-                />
+                {loginItem.auth ? (
+                  <YouAreLogged
+                    loginItem={loginItem}
+                  />
+                ) : (
+                  <div>
+                    <LoginAndRegister
+                      loginItem={loginItem}
+                      updateLoginItem={updateLoginItem}
+                    />
+                  </div>
+                )}
               </div>
             </Router>
             <Route path="/">

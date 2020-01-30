@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 import logo from '../images/ninja.gif';
 import Strings from '../Helpers/Strings';
-import LoginLogoffButton from './LoginLogoffButton';
+import LoginLogoffButton from './Auth/LoginLogoffButton';
 
 const useStyles = makeStyles(theme => ({
   root: {
