@@ -43,7 +43,6 @@ export default function(props) {
   }
 
   const register = () => {
-  //   console.log(validationData, validationDataPassword);
     if (
       validationData.name
       || validationData.address
@@ -52,7 +51,7 @@ export default function(props) {
       || !validationDataPassword
       || (!validationData.name && !newClient.name /* not init-ed */)
     ) {
-      setErrorMessage('Fill in the form with correct data');
+      setErrorMessage('Please, fill in the form with correct data');
       toggleErrorMessage(true);
       return;
     }
@@ -61,8 +60,9 @@ export default function(props) {
       if (loginData.auth) {
         props.updateLoginItem(loginData);
       } else {
-        const mistake = validationData.name || validationData.address || validationData.email ||
+        let mistake = validationData.name || validationData.address || validationData.email ||
               validationData.phone || validationData.password || 'Registration error';
+        if (!password) mistake = 'Please, fill in your password';
         setErrorMessage(mistake);
         toggleErrorMessage(true);
       }

@@ -9,7 +9,6 @@ import ProductFooter from './Components/ProductFooter';
 import ProductList from './Components/ProductList';
 import Cart from './Components/Cart/Cart';
 import LoginAndRegister from './Components/Auth/LoginAndRegister';
-import YouAreLogged from './Components/Auth/YouAreLogged';
 import Api from './Api';
 
 function App() {
@@ -21,7 +20,7 @@ function App() {
   const [ productUpdates, invokeProductUpdate ] = useState(0);
   const [ error, setError ] = useState(false);
 
-  const [ loginItem, updateLoginItem ] = useState({ auth: false });
+  const [ loginItem, updateLoginItem ] = useState({ auth: null });
 
   const [ client, setClient ] = useLocalStorage({
     name: '',
@@ -74,20 +73,10 @@ function App() {
               />
             </Route>
             <Router exact path="/login">
-              <div style={{textAlign:'center'}}>
-                {loginItem.auth ? (
-                  <YouAreLogged
-                    loginItem={loginItem}
-                  />
-                ) : (
-                  <div>
-                    <LoginAndRegister
-                      loginItem={loginItem}
-                      updateLoginItem={updateLoginItem}
-                    />
-                  </div>
-                )}
-              </div>
+              <LoginAndRegister
+                loginItem={loginItem}
+                updateLoginItem={updateLoginItem}
+              />
             </Router>
             <Route path="/">
               <ProductList

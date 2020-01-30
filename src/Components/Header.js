@@ -27,6 +27,10 @@ const useStyles = makeStyles(theme => ({
     marginTop: 10,
     marginBottom: 10
   },
+  caption: {
+    marginLeft: 6,
+    marginRight: 4
+  }
 }));
 
 export default function(props) {
@@ -37,7 +41,7 @@ export default function(props) {
       <AppBar position="static">
         <Toolbar className={classes.toolbar}>
           <Avatar alt={Strings.shop.name} src={logo} className={classes.logo} component={Link} to="/" />
-          <Typography variant="h6">
+          <Typography variant="h6" className={classes.caption}>
             {Strings.shop.name}
           </Typography>
           <LoginLogoffButton
