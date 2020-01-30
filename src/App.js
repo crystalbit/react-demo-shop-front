@@ -31,7 +31,7 @@ function App() {
 
   // check if logged in
   useEffect(() => {
-    Api.logged().then(console.log);
+    Api.logged().then(updateLoginItem);
   }, []);
 
   useEffect(() => {
@@ -58,6 +58,7 @@ function App() {
       <div className="App">
         <Header
           loginItem={loginItem}
+          updateLoginItem={updateLoginItem}
         />
         <div className="app-body">
           <Switch>
@@ -75,6 +76,7 @@ function App() {
               <div style={{textAlign:'center'}}>
                 <Login
                   loginItem={loginItem}
+                  updateLoginItem={updateLoginItem}
                 />
               </div>
             </Router>

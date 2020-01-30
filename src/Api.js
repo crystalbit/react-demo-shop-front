@@ -65,6 +65,15 @@ class Api {
   }
 
   /**
+   * logoff
+   * @return {object} auth: false
+   */
+  logout() {
+    return this.GET('auth/logout')
+    .then(it => it.data);
+  }
+
+  /**
    * log in
    * @param {string} email
    * @param {string} password
