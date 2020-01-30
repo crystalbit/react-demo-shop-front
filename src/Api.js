@@ -53,6 +53,26 @@ class Api {
     return this.POST('orders/push', { client, options, positions })
     .then(response => response.json());
   }
+
+  /**
+   * checks if logged in
+   * @return {object} auth: bool, client if logged
+   */
+  logged() {
+    return this.GET('auth/login')
+    .then(response => response.json());
+  }
+
+  /**
+   * log in
+   * @param {string} email
+   * @param {string} password
+   * @return {object} auth: bool, client if logged
+   */
+  login(email, password) {
+    return this.POST('auth/login', { email, password })
+    .then(response => response.json());
+  }
 }
 
 export default new Api();

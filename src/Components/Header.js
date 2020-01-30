@@ -1,12 +1,13 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 import Avatar from '@material-ui/core/Avatar';
 import logo from '../images/ninja.gif';
 import Strings from '../Helpers/Strings';
+import LoginLogoffButton from './LoginLogoffButton';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -35,11 +36,13 @@ export default function(props) {
         <div className={classes.root}>
             <AppBar position="static">
                 <Toolbar className={classes.toolbar}>
-                    <Avatar alt={Strings.shop.name} src={logo} className={classes.logo} />
+                    <Avatar alt={Strings.shop.name} src={logo} className={classes.logo} component={Link} to="/" />
                     <Typography variant="h6">
                         {Strings.shop.name}
                     </Typography>
-                    <Button color="inherit">Login</Button>
+                    <LoginLogoffButton
+                      loginItem={props.loginItem}
+                    />
                 </Toolbar>
             </AppBar>
         </div>

@@ -9,22 +9,18 @@ import ProductFooter from './Components/ProductFooter';
 import ProductList from './Components/ProductList';
 import Cart from './Components/Cart/Cart';
 import Login from './Components/Auth/Login';
+import Api from './Api';
 
 function App() {
   const [ loading, isLoading ] = useState(true);
 
-  /**
-   * cart object is like
-   * {
-   *   id: quantity,
-   *   ...
-   * }
-   */
   const [ cart, setCart ] = useLocalStorage('cart', {});
   const [ products, setProducts ] = useState([]);
   const [ productsById, setProductsById ] = useState([]);
-  const [ updates, invokeUpdate ] = useState(0);
+  const [ productUpdates, invokeProductUpdate ] = useState(0);
   const [ error, setError ] = useState(false);
+
+  const [ loginItem, updateLoginItem ] = useState({ auth: false });
 
   const [ client, setClient ] = useLocalStorage({
     name: null,
@@ -32,6 +28,11 @@ function App() {
     address: null,
     phone: null
   });
+
+  // check if logged in
+  useEffect(() => {
+    Api.logged().then(console.log);
+  }, []);
 
   useEffect(() => {
     api.getProducts()
@@ -50,12 +51,14 @@ function App() {
       }
     })
     .catch(() => setError(true));
-  }, [updates]);
+  }, [productUpdates]);
 
   return (
     <Router>
       <div className="App">
-        <Header />
+        <Header
+          loginItem={loginItem}
+        />
         <div className="app-body">
           <Switch>
             <Route exact path="/checkout">
@@ -65,12 +68,15 @@ function App() {
                 productsById={productsById}
                 client={client}
                 setClient={setClient}
+                loginItem={loginItem}
               />
             </Route>
             <Router exact path="/login">
-              <Login
-
-              />
+              <div style={{textAlign:'center'}}>
+                <Login
+                  loginItem={loginItem}
+                />
+              </div>
             </Router>
             <Route path="/">
               <ProductList
@@ -81,7 +87,7 @@ function App() {
                 products={products}
                 productsById={productsById}
                 error={error}
-                update={() => invokeUpdate(updates + 1)}
+                update={() => invokeProductUpdate(productUpdates + 1)}
               />
               {loading ? '' : <ProductFooter />}
             </Route>

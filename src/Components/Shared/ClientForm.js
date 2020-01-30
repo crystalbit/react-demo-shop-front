@@ -56,6 +56,7 @@ export default function (props) {
           label="Your email"
           style={{ margin: 8 }}
           margin="normal"
+          type="email"
           InputLabelProps={{ shrink: true }}
         />
         <TextField
