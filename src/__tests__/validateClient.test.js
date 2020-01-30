@@ -27,5 +27,5 @@ it('check validation with invalid data / проверяем валидацию �
     expect(validation.name).toBe('Name shall be 3 symbols or more');
     expect(validation.address).toBe('Address shall be 10 symbols or more');
     expect(validation.email).toBe('Please, provide a valid email');
-    expect(validation.phone).toBe('Please, provide a valid phone');
+    expect(validation.phone).toBe('Phone validation error');
 });
