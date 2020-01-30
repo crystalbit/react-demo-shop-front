@@ -1,5 +1,7 @@
 import config from './config';
 import qs from 'query-string';
+import axios from 'axios';
+axios.defaults.withCredentials = true;
 
 class Api {
   /**
@@ -9,7 +11,7 @@ class Api {
    * @return {Promise} result of fetch
    */
   GET(route, params = {}) {
-    return fetch(qs.stringifyUrl({
+    return axios(qs.stringifyUrl({
       url: config.api.entry + route,
       query: params
     }));
@@ -22,16 +24,15 @@ class Api {
    * @return {Promise} result of fetch
    */
   POST(route, data = {}) {
-    return fetch(
+    return axios.post(
       qs.stringifyUrl({
         url: config.api.entry + route,
       }),
+      data,
       {
-        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data)
       }
     );
   }
@@ -42,7 +43,7 @@ class Api {
    */
   getProducts() {
     return this.GET('products/list')
-    .then(response => response.json());
+    .then(it => it.data);
   }
 
   /**
@@ -51,7 +52,7 @@ class Api {
    */
   postOrder(client, options, positions) {
     return this.POST('orders/push', { client, options, positions })
-    .then(response => response.json());
+    .then(it => it.data);
   }
 
   /**
@@ -60,7 +61,7 @@ class Api {
    */
   logged() {
     return this.GET('auth/login')
-    .then(response => response.json());
+    .then(it => it.data);
   }
 
   /**
@@ -71,7 +72,7 @@ class Api {
    */
   login(email, password) {
     return this.POST('auth/login', { email, password })
-    .then(response => response.json());
+    .then(it => it.data);
   }
 }
 
