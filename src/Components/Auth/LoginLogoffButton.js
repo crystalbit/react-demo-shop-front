@@ -32,7 +32,7 @@ export default function(props) {
   return (
     <Button
       component={Link}
-      variant={props.variant || ''}
+      variant={props.variant || 'text'}
       to="/login"
       color={props.color || 'inherit'}
     >

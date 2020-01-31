@@ -75,8 +75,9 @@ export default function(props) {
                   <InboxIcon />
                 </ListItemIcon>
                 <ListItemText primary={moment(order.createdAt).format('LLL') + ' $' + (
-                  (parseFloat(order.delivery_cost) || 0) + order.products.map(it => it.price * it.quantity)
-                                                                        .reduce((a, b) => a + b)
+                  (parseFloat(order.delivery_cost) || 0) +
+                  (order.products && order.products.length) ? order.products.map(it => it.price * it.quantity)
+                                                                        .reduce((a, b) => a + b) : 0
                 )} />
                 {opened === order.id ? <ExpandLess /> : <ExpandMore />}
               </ListItem>

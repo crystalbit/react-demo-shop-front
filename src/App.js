@@ -11,6 +11,13 @@ import LoginAndRegister from './Components/Auth/LoginAndRegister';
 import Api from './Api';
 
 function App() {
+  const EMPTY_CLIENT = {
+    name: '',
+    email: '',
+    address: '',
+    phone: ''
+  };
+
   const [ loading, isLoading ] = useState(true);
 
   const [ cart, setCart ] = useLocalStorage('cart', {});
@@ -21,12 +28,7 @@ function App() {
 
   const [ loginItem, updateLoginItem ] = useState({ auth: null });
 
-  const [ client, setClient ] = useLocalStorage({
-    name: '',
-    email: '',
-    address: '',
-    phone: ''
-  });
+  const [ client, setClient ] = useLocalStorage(EMPTY_CLIENT);
 
   // check if logged in
   useEffect(() => {
@@ -36,7 +38,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    setClient(loginItem.client);
+    setClient(loginItem.client || EMPTY_CLIENT);
     // eslint-disable-next-line
   }, [loginItem])
 
