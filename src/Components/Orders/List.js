@@ -43,7 +43,13 @@ export default function(props) {
 
   const [ opened, setOpened ] = useState(0);
 
-  if (!props.orders || !props.orders.length) return '';
+  if (!props.orders || !props.orders.length) return (
+    <Paper className={classes.paper}>
+      <div className={classes.inner}>
+        You have no orders yet
+      </div>
+    </Paper>
+  );
 
   return (
     <Paper className={classes.paper}>
