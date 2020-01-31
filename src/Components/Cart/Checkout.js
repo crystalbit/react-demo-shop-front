@@ -108,6 +108,7 @@ export default function(props) {
               if (
                 validationData.name || validationData.address || validationData.phone || validationData.email
               ) return;
+              if (!getSubtotal(props.cart)) return;
               Api.postOrder(props.client, { delivery_cost }, props.cart).then(result => {
                 if (result.success) {
                   showConfirmModal(true);
