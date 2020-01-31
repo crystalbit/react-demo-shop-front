@@ -55,11 +55,6 @@ export default function(props) {
   const subtotal = getSubtotal(props.cart);
   const delivery_cost = subtotal >= 50 ? 0 : 5;
 
-  // const { loginItem, setClient } = props;
-  // useEffect(() => {
-  //   if (loginItem.auth) setClient(loginItem.client);
-  // }, [loginItem, setClient]);
-
   return (
     <div className={classes.root}>
       <Confirm

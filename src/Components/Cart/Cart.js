@@ -12,12 +12,6 @@ const useStyles = makeStyles(theme => ({
     height: 150,
     padding: 20,
     marginLeft: 8
-  },
-  leftItem: {
-    
-  },
-  rightItem: {
-    
   }
 }));
 
@@ -27,7 +21,7 @@ export default function(props) {
   return(
     <React.Fragment>
       <Grid container spacing={2} justify="space-around">
-        <Grid item xs={12} sm={6} className={classes.leftItem}>
+        <Grid item xs={12} sm={6}>
           {props.cart && !getSubtotal(props.cart) ? (
             <Paper className={classes.emptyCart}>
               Cart is empty

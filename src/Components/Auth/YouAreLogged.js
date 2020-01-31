@@ -48,8 +48,6 @@ export default function(props) {
         <Button
           variant="outlined"
           color="primary"
-          //component={Link}
-          //to="/"
           onClick={() => window.location = ('/')}
           className={classes.button}
         >
@@ -70,6 +68,5 @@ export default function(props) {
         />
       </div>
     </React.Fragment>
-    
   );
 }

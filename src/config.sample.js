@@ -8,10 +8,10 @@
  */
 
 export default ({
-    api: {
-        entry: 'http://localhost:3333/api/'
-    },
-    directories: {
-        images: '/images/'
-    }
+  api: {
+    entry: 'http://localhost:3333/api/'
+  },
+  directories: {
+    images: '/images/'
+  }
 });

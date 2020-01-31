@@ -28,15 +28,15 @@ export default function Confirm(props) {
         open={props.open}
         onClose={() => props.onShowModal(false)}
     >
-        <div className={classes.paper}>
-            <Typography variant="h2">Success!</Typography>
-            <Typography variant="body1">
-                We just began to make the GREATEST PIZZA IN THE WORLD for you, my dear friend
-            </Typography>
-            <Typography variant="body2">
-                Please, be sure your phone is turned on and is able to receive our managers' call :)
-            </Typography>
-        </div>
+      <div className={classes.paper}>
+        <Typography variant="h2">Success!</Typography>
+        <Typography variant="body1">
+          We just began to make the GREATEST PIZZA IN THE WORLD for you, my dear friend
+        </Typography>
+        <Typography variant="body2">
+          Please, be sure your phone is turned on and is able to receive our managers' call :)
+        </Typography>
+      </div>
     </Modal>
   );
 }
