@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Switch, BrowserRouter as Router, Route } from 'react-router-dom';
-import './App.css';
 import api from './Api';
 
 import useLocalStorage from './Helpers/useLocalStorage';
