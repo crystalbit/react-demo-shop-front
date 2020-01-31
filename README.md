@@ -2,7 +2,8 @@
 This is the Demo Shop frontend.
 
 Here is the repo with instructions, dump and uploads: https://github.com/crystalbit/demo-shop-howto-deploy
-Here is a backend part: https://github.com/crystalbit/node-demo-shop-api
+
+Here is the backend part: https://github.com/crystalbit/node-demo-shop-api
 
 Please, visit the first link to read about:
 * deploy on localhost
