@@ -22,7 +22,7 @@ export default function (props) {
         error={!!props.validationData ? !!props.validationData.name : false}
         helperText={props.validationData ? props.validationData.name : null || null}
         InputProps={{
-          value: props.client && props.client.name,
+          value: props.client && props.client.name ? props.client.name : '',
           onChange: event => setClient({ ...props.client, name: event.target.value})
         }}
         style={{ margin: 8 }}
@@ -37,7 +37,7 @@ export default function (props) {
         error={!!props.validationData.address}
         helperText={props.validationData.address || null}
         InputProps={{
-          value: props.client && props.client.address,
+          value: props.client && props.client.address ? props.client.address : '',
           onChange: event => setClient({ ...props.client, address: event.target.value}),
         }}
         style={{ margin: 8 }}
@@ -53,7 +53,7 @@ export default function (props) {
         error={!!props.validationData.email}
         helperText={props.validationData.email || null}
         InputProps={{
-          value: props.client && props.client.email,
+          value: props.client && props.client.email ? props.client.email : '',
           onChange: event => setClient({ ...props.client, email: event.target.value}),
         }}
         style={{ margin: 8 }}
@@ -69,7 +69,7 @@ export default function (props) {
         helperText={props.validationData.phone || null}
         InputProps={{
           inputComponent: TextMaskCustom,
-          value: mask,
+          value: mask || '',
           onChange: event => {
             setMask(event.target.value);
             setClient({ ...props.client, phone: event.target.value})
