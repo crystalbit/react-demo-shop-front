@@ -94,6 +94,15 @@ class Api {
     return this.POST('auth/register', { ...client, password })
     .then(it => it.data);
   }
+
+  /**
+   * get orders of a logged in user
+   * @return {object}
+   */
+  orders() {
+    return this.GET('orders/get')
+    .then(it => it.data);
+  }
 }
 
 export default new Api();

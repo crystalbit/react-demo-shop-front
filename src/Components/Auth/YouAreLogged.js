@@ -1,11 +1,9 @@
-import React from 'react';
-//import { useHistory, withRouter, Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
-
-import { createBrowserHistory } from 'history';
-const history = createBrowserHistory();
+import Api from '../../Api';
+import OrderList from '../Orders/List';
 
 const useStyles = makeStyles(theme => ({
   inner: {
@@ -26,39 +24,52 @@ const useStyles = makeStyles(theme => ({
 
 export default function(props) {
   const classes = useStyles();
-  //const history = useHistory();
+
+  const [ orders, setOrders ] = useState(null);
+
+  useEffect(() => {
+    Api.orders().then(setOrders);
+  }, [props.loginItem.auth]);
 
   return (
-    <Paper className={classes.paper}>
-      <div className={classes.inner}>
-        {props.loginItem.auth === null ? (
-          <React.Fragment>
-            Loading...
-          </React.Fragment>
-        ) : (
-          <React.Fragment>
-            Hi, {props.loginItem.client.name}! You are logged in.
-          </React.Fragment>
-        )}
+    <React.Fragment>
+      <Paper className={classes.paper}>
+        <div className={classes.inner}>
+          {props.loginItem.auth === null ? (
+            <React.Fragment>
+              Loading...
+            </React.Fragment>
+          ) : (
+            <React.Fragment>
+              Hi, {props.loginItem.client.name}! You are logged in.
+            </React.Fragment>
+          )}
+        </div>
+        <Button
+          variant="outlined"
+          color="primary"
+          //component={Link}
+          //to="/"
+          onClick={() => window.location = ('/')}
+          className={classes.button}
+        >
+          Main page
+        </Button>
+        <Button
+          variant="outlined"
+          color="primary"
+          onClick={() => window.location = ('/checkout')}
+          className={classes.button}
+        >
+          Cart
+        </Button>
+      </Paper>
+      <div>
+        <OrderList
+          orders={orders}
+        />
       </div>
-      <Button
-        variant="outlined"
-        color="primary"
-        //component={Link}
-        //to="/"
-        onClick={() => window.location = ('/')}
-        className={classes.button}
-      >
-        Main page
-      </Button>
-      <Button
-        variant="outlined"
-        color="primary"
-        onClick={() => window.location = ('/checkout')}
-        className={classes.button}
-      >
-        Cart
-      </Button>
-    </Paper>
+    </React.Fragment>
+    
   );
 }
