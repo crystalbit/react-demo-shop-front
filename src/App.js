@@ -31,8 +31,14 @@ function App() {
 
   // check if logged in
   useEffect(() => {
-    Api.logged().then(updateLoginItem);
+    Api.logged().then(item => {
+      updateLoginItem(item);
+    });
   }, []);
+
+  useEffect(() => {
+    setClient(loginItem.client);
+  }, [loginItem])
 
   useEffect(() => {
     api.getProducts()

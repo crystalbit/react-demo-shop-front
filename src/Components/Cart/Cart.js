@@ -80,6 +80,7 @@ export default function(props) {
             onClearCart={() => props.onSetCart({})}
             client={props.client}
             setClient={props.setClient}
+            loginItem={props.loginItem}
           />
         </Grid>
       </Grid>
