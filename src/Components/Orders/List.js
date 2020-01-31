@@ -30,7 +30,7 @@ const useStyles = makeStyles(theme => ({
   paper: {
     padding: theme.spacing(1),
     margin: theme.spacing(2),
-    minWidth: 400,
+    maxWidth: 800,
     textAlign: 'center'
   },
   nested: {

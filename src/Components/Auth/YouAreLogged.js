@@ -4,6 +4,7 @@ import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import Api from '../../Api';
 import OrderList from '../Orders/List';
+import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles(theme => ({
   inner: {
@@ -32,41 +33,43 @@ export default function(props) {
   }, [props.loginItem.auth]);
 
   return (
-    <React.Fragment>
-      <Paper className={classes.paper}>
-        <div className={classes.inner}>
-          {props.loginItem.auth === null ? (
-            <React.Fragment>
-              Loading...
-            </React.Fragment>
-          ) : (
-            <React.Fragment>
-              Hi, {props.loginItem.client.name}! You are logged in.
-            </React.Fragment>
-          )}
-        </div>
-        <Button
-          variant="outlined"
-          color="primary"
-          onClick={() => window.location = ('/')}
-          className={classes.button}
-        >
-          Main page
-        </Button>
-        <Button
-          variant="outlined"
-          color="primary"
-          onClick={() => window.location = ('/checkout')}
-          className={classes.button}
-        >
-          Cart
-        </Button>
-      </Paper>
-      <div>
+    <Grid container>
+      <Grid container item xs={12} spacing={3} justify="center">
+        <Paper className={classes.paper}>
+          <div className={classes.inner}>
+            {props.loginItem.auth === null ? (
+              <React.Fragment>
+                Loading...
+              </React.Fragment>
+            ) : (
+              <React.Fragment>
+                Hi, {props.loginItem.client.name}! You are logged in.
+              </React.Fragment>
+            )}
+          </div>
+          <Button
+            variant="outlined"
+            color="primary"
+            onClick={() => window.location = ('/')}
+            className={classes.button}
+          >
+            Main page
+          </Button>
+          <Button
+            variant="outlined"
+            color="primary"
+            onClick={() => window.location = ('/checkout')}
+            className={classes.button}
+          >
+            Cart
+          </Button>
+        </Paper>
+      </Grid>
+      <Grid container item xs={12} spacing={3} justify="center">
         <OrderList
           orders={orders}
         />
-      </div>
-    </React.Fragment>
+      </Grid>
+    </Grid>
   );
 }
