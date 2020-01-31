@@ -31,6 +31,7 @@ export default function(props) {
   return (
     <Paper className={classes.paper}>
       <div className={classes.inner}>
+        Login
         <Snackbar open={showErrorMessage} autoHideDuration={6000} onClose={() => toggleErrorMessage(false)}>
           <Alert onClose={() => toggleErrorMessage(false)} severity="error" elevation={6} variant="filled">
             {errorMessage}
