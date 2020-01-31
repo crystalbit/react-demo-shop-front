@@ -11,6 +11,7 @@ import getSubtotal from '../../Helpers/getSubtotal';
 import Confirm from '../Confirm';
 import ClientForm from '../Shared/ClientForm';
 import Api from '../../Api';
+import LoginLogoffButton from '../Auth/LoginLogoffButton';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -99,6 +100,18 @@ export default function(props) {
             validationData={validationData}
             setValidationData={setValidationData}
           />
+          {props.loginItem && !props.loginItem.auth && (
+            <div>
+              You can{'\u00A0'}
+              <LoginLogoffButton
+                loginItem={props.loginItem}
+                updateLoginItem={props.updateLoginItem}
+                color="primary"
+                variant="contained"
+              />
+              {'\u00A0'}to fill in with your account data and store new order to an account
+            </div>
+          )}
           <Button
             aria-label="Make an order"
             color="primary"

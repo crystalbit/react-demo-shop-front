@@ -21,7 +21,7 @@ export default function(props) {
         to="/login"
       />
       <Button
-        color="inherit"
+        color={props.color || 'inherit'}
         onClick={() => Api.logout().then(props.updateLoginItem)}
       >
         Logoff
@@ -31,9 +31,10 @@ export default function(props) {
 
   return (
     <Button
-      color="inherit"
       component={Link}
+      variant={props.variant || ''}
       to="/login"
+      color={props.color || 'inherit'}
     >
       Login
     </Button>
