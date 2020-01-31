@@ -11,7 +11,15 @@ export default function(props) {
   // if logged show logoff
   if (props.loginItem.auth === true) return (
     <div>
-      <Chip label={'Hi, ' + props.loginItem.client.name} />
+      <Chip label={'Hi, ' + props.loginItem.client.name} size="small" />
+      <Chip
+        label="Orders"
+        size="small"
+        component={Link}
+        color="secondary"
+        clickable
+        to="/login"
+      />
       <Button
         color="inherit"
         onClick={() => Api.logout().then(props.updateLoginItem)}
