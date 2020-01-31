@@ -40,73 +40,72 @@ const useStyles = makeStyles(theme => ({
 
 export default function(props) {
   const classes = useStyles();
-  console.log(props.orders)
 
   const [ opened, setOpened ] = useState(0);
 
-  if (!props.orders) return '';
+  if (!props.orders || !props.orders.length) return '';
 
   return (
-<Paper className={classes.paper}>
-  <div className={classes.inner}>
-    <List
-      component="nav"
-      aria-labelledby="nested-list-subheader"
-      subheader={
-        <ListSubheader component="div" id="nested-list-subheader">
-          Your orders
-        </ListSubheader>
-      }
-      className={classes.root}
-    >
-      {props.orders.map(order => (
-        <React.Fragment key={order.id}>
-          <ListItem
-            button
-            onClick={() => order.id === opened ? setOpened(-1) : setOpened(order.id)}
-            key={order.id * 1000}
-          >
-            <ListItemIcon>
-              <InboxIcon />
-            </ListItemIcon>
-            <ListItemText primary={moment(order.createdAt).format('LLL') + ' $' + (
-              (parseFloat(order.delivery_cost) || 0) + order.products.map(it => it.price * it.quantity)
-                                                                     .reduce((a, b) => a + b)
-            )} />
-            {opened === order.id ? <ExpandLess /> : <ExpandMore />}
-          </ListItem>
-          <Collapse in={opened === order.id} timeout="auto" unmountOnExit key={order.id}>
-            {order.products.map(product => (
-              <List component="div" disablePadding key={order.id * 10000 + product.id}>
-                <ListItem button className={classes.nested}>
-                  <ListItemAvatar>
-                    <Avatar alt={product.name} src={path.join(config.directories.images, product.image)} />
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary={product.name}
-                    secondary={'$' + product.price + ' x ' + product.quantity}
-                  />
-                </ListItem>
-              </List>
-            ))}
-            {parseFloat(order.delivery_cost) !== 0 && (
-              <List component="div" disablePadding key="delivery">
-                <ListItem button className={classes.nested}>
-                  <ListItemIcon>
-                    <DraftsIcon />
-                  </ListItemIcon>
-                  <ListItemText
-                    primary="Delivery"
-                    secondary={'$' + order.delivery_cost}
-                  />
-                </ListItem>
-              </List>
-            )}
-          </Collapse>
-        </React.Fragment>
-      ))}
-    </List>
-    </div>
+    <Paper className={classes.paper}>
+      <div className={classes.inner}>
+        <List
+          component="nav"
+          aria-labelledby="nested-list-subheader"
+          subheader={
+            <ListSubheader component="div" id="nested-list-subheader">
+              Your orders
+            </ListSubheader>
+          }
+          className={classes.root}
+        >
+          {props.orders.map(order => (
+            <React.Fragment key={order.id}>
+              <ListItem
+                button
+                onClick={() => order.id === opened ? setOpened(-1) : setOpened(order.id)}
+                key={order.id * 1000}
+              >
+                <ListItemIcon>
+                  <InboxIcon />
+                </ListItemIcon>
+                <ListItemText primary={moment(order.createdAt).format('LLL') + ' $' + (
+                  (parseFloat(order.delivery_cost) || 0) + order.products.map(it => it.price * it.quantity)
+                                                                        .reduce((a, b) => a + b)
+                )} />
+                {opened === order.id ? <ExpandLess /> : <ExpandMore />}
+              </ListItem>
+              <Collapse in={opened === order.id} timeout="auto" unmountOnExit key={order.id}>
+                {order.products.map(product => (
+                  <List component="div" disablePadding key={order.id * 10000 + product.id}>
+                    <ListItem button className={classes.nested}>
+                      <ListItemAvatar>
+                        <Avatar alt={product.name} src={path.join(config.directories.images, product.image)} />
+                      </ListItemAvatar>
+                      <ListItemText
+                        primary={product.name}
+                        secondary={'$' + product.price + ' x ' + product.quantity}
+                      />
+                    </ListItem>
+                  </List>
+                ))}
+                {parseFloat(order.delivery_cost) !== 0 && (
+                  <List component="div" disablePadding key="delivery">
+                    <ListItem button className={classes.nested}>
+                      <ListItemIcon>
+                        <DraftsIcon />
+                      </ListItemIcon>
+                      <ListItemText
+                        primary="Delivery"
+                        secondary={'$' + order.delivery_cost}
+                      />
+                    </ListItem>
+                  </List>
+                )}
+              </Collapse>
+            </React.Fragment>
+          ))}
+        </List>
+      </div>
     </Paper>
     );
 }
